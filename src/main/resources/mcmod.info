@@ -1,0 +1,16 @@
+[
+{
+  "modid": "merculab",
+  "name": "MercuLab",
+  "description": "A mod that allows you to apply the chemistry of our world in the context of the minecraft universe.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ScottNotFound"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
