@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab.elements;
+package net.scottnotfound.merculab.element;
 
 
 
