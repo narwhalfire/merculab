@@ -2,10 +2,6 @@ package net.scottnotfound.merculab.elements;
 
 
 
-
-
-
-
 public enum Element {
 
     HYDROGEN        ("Hydrogen","H"),
@@ -129,8 +125,8 @@ public enum Element {
 
 
 
-    private String name;
-    private String symbol;
+    public final String name;
+    public final String symbol;
 
 
     Element(String name, String symbol) {

@@ -43,6 +43,6 @@ public class MercuLab {
 
     @Mod.EventHandler
     public void serverLoad(FMLServerStartingEvent event) {
-
+        proxy.serverLoad(event);
     }
 }

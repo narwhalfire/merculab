@@ -1,7 +1,6 @@
 package net.scottnotfound.merculab.proxy;
 
 // imports
-import net.minecraft.init.Items;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
