@@ -1,6 +1,9 @@
 package net.scottnotfound.merculab.atom;
 
 public class Bond {
+    /**
+     * This class is a part of the Graph representation of a molecule. It represents the edge of a graph.
+     */
 
     private static final int DEFAULT_WEIGHT = 1;
 

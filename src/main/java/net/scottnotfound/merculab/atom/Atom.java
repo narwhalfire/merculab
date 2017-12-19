@@ -5,6 +5,9 @@ import net.scottnotfound.merculab.element.IElement;
 
 
 public class Atom implements IElement {
+    /**
+     * This class is part of the Graph representation of a molecule. It represents the vertex of a graph.
+     */
 
     private int uniqueLabel;
 

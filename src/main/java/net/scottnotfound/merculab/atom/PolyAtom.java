@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 
 public class PolyAtom {
+    /**
+     * This class is essentially a Graph data structure consisting of Atoms (vertices) and Bonds (edges).
+     */
 
     private Set<Atom> atoms;
     private Set<Bond> bonds;
