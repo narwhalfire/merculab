@@ -12,12 +12,19 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.scottnotfound.merculab.Config;
+import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.block.GuiProxy;
 import net.scottnotfound.merculab.block.TestBlock;
+import net.scottnotfound.merculab.block.TestContainerBlock;
+import net.scottnotfound.merculab.block.TestContainerTileEntity;
 import net.scottnotfound.merculab.item.TestItem;
 
 import java.io.File;
 
+import static net.scottnotfound.merculab.MercuLab.instance;
 import static net.scottnotfound.merculab.MercuLabBlocks.*;
 
 
@@ -33,7 +40,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
-
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiProxy());
     }
 
     public void postInit(FMLPostInitializationEvent event) {
@@ -49,11 +56,14 @@ public class CommonProxy {
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
         event.getRegistry().register(new TestBlock());
+        event.getRegistry().register(new TestContainerBlock());
+        GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MODID + "_testcontainerblock");
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
         event.getRegistry().register(new TestItem());
         event.getRegistry().register(new ItemBlock(testBlock).setRegistryName(testBlock.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(testContainerBlock).setRegistryName(testContainerBlock.getRegistryName()));
     }
 }
