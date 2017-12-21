@@ -1,0 +1,13 @@
+{
+  "forge)marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "textures": {
+      "all": "merculab:blocks/testcontainer"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

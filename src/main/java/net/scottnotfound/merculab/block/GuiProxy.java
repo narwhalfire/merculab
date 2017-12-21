@@ -10,7 +10,7 @@ public class GuiProxy implements IGuiHandler {
 
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        BlockPos pos = new BlockPos(x,y,x);
+        BlockPos pos = new BlockPos(x,y,z);
         TileEntity tileEntity = world.getTileEntity(pos);
         if (tileEntity instanceof TestContainerTileEntity) {
             return new TestContainer(player.inventory, (TestContainerTileEntity) tileEntity);
