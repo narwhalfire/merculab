@@ -16,16 +16,14 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.scottnotfound.merculab.Config;
 import net.scottnotfound.merculab.MercuLab;
-import net.scottnotfound.merculab.block.GuiProxy;
-import net.scottnotfound.merculab.block.TestBlock;
-import net.scottnotfound.merculab.block.TestContainerBlock;
-import net.scottnotfound.merculab.block.TestContainerTileEntity;
-import net.scottnotfound.merculab.item.TestItem;
+import net.scottnotfound.merculab.MercuLabBlocks;
+import net.scottnotfound.merculab.MercuLabItems;
+import net.scottnotfound.merculab.test.TestContainerTileEntity;
+import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
 import java.io.File;
 
 import static net.scottnotfound.merculab.MercuLab.instance;
-import static net.scottnotfound.merculab.MercuLabBlocks.*;
 
 
 @Mod.EventBusSubscriber
@@ -40,7 +38,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiProxy());
+        registerOthers();
     }
 
     public void postInit(FMLPostInitializationEvent event) {
@@ -55,15 +53,29 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new TestBlock());
-        event.getRegistry().register(new TestContainerBlock());
-        GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MODID + "_testcontainerblock");
+        event.getRegistry().register(MercuLabBlocks.testBlock);
+        event.getRegistry().register(MercuLabBlocks.testContainerBlock);
+        event.getRegistry().register(MercuLabBlocks.testBlockProcessAB);
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(new TestItem());
-        event.getRegistry().register(new ItemBlock(testBlock).setRegistryName(testBlock.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(testContainerBlock).setRegistryName(testContainerBlock.getRegistryName()));
+        event.getRegistry().register(MercuLabItems.testItem);
+        event.getRegistry().register(MercuLabItems.testItemA);
+        event.getRegistry().register(MercuLabItems.testItemB);
+        event.getRegistry().register(new ItemBlock(MercuLabBlocks.testBlock)
+                .setRegistryName(MercuLabBlocks.testBlock.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(MercuLabBlocks.testContainerBlock)
+                .setRegistryName(MercuLabBlocks.testContainerBlock.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(MercuLabBlocks.testBlockProcessAB)
+                .setRegistryName(MercuLabBlocks.testBlockProcessAB.getRegistryName()));
+    }
+
+    public static void registerOthers() {
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiProxy());
+
+        // tile entities
+        GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MODID + "_testcontainerblock");
+        GameRegistry.registerTileEntity(TestTileEntityProcessAB.class, MercuLab.MODID + "_processab");
     }
 }

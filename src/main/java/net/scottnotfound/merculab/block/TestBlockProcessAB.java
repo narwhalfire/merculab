@@ -16,15 +16,16 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
-public class TestContainerBlock extends Block implements ITileEntityProvider {
+public class TestBlockProcessAB extends Block implements ITileEntityProvider {
 
-    public static final int GUI_ID = 1;
+    public static final int GUI_ID = 2;
 
-    public TestContainerBlock() {
+    public TestBlockProcessAB() {
         super(Material.ROCK);
-        setRegistryName("testcontainerblock");
-        setUnlocalizedName(MercuLab.MODID + ".testcontainerblock");
+        setRegistryName("processab");
+        setUnlocalizedName(MercuLab.MODID + ".processab");
     }
 
     @SideOnly(Side.CLIENT)
@@ -34,21 +35,22 @@ public class TestContainerBlock extends Block implements ITileEntityProvider {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TestContainerTileEntity();
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TestTileEntityProcessAB();
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand,
-                                    EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(World world, BlockPos blockPos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float htZ) {
+
         if (world.isRemote) {
             return true;
         }
-        TileEntity tileEntity = world.getTileEntity(pos);
-        if (!(tileEntity instanceof TestContainerTileEntity)) {
+        TileEntity tileEntity = world.getTileEntity(blockPos);
+        if (!(tileEntity instanceof TestTileEntityProcessAB)) {
             return false;
         }
-        player.openGui(MercuLab.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
+        player.openGui(MercuLab.instance, GUI_ID, world, blockPos.getX(), blockPos.getY(), blockPos.getZ());
         return true;
     }
+
 }

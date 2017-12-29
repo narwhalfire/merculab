@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab.block;
+package net.scottnotfound.merculab.test;
 
 import jline.internal.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
