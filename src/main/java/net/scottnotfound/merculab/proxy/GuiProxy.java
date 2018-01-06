@@ -7,12 +7,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.gui.TestGuiProcessAB;
-import net.scottnotfound.merculab.inventory.TestContainerProcessAB;
+import net.scottnotfound.merculab.inventory.gui.TestGuiProcessAB;
+import net.scottnotfound.merculab.inventory.container.TestContainerProcessAB;
 import net.scottnotfound.merculab.test.TestContainer;
 import net.scottnotfound.merculab.test.TestContainerGui;
 import net.scottnotfound.merculab.test.TestContainerTileEntity;
-import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
 public class GuiProxy implements IGuiHandler {
 

@@ -7,9 +7,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.MercuLabBlocks;
-import net.scottnotfound.merculab.MercuLabCompounds;
-import net.scottnotfound.merculab.MercuLabItems;
+import net.scottnotfound.merculab.init.MercuLabBlocks;
+import net.scottnotfound.merculab.init.MercuLabCompounds;
+import net.scottnotfound.merculab.init.MercuLabItems;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)

@@ -16,8 +16,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.scottnotfound.merculab.Config;
 import net.scottnotfound.merculab.MercuLab;
-import net.scottnotfound.merculab.MercuLabBlocks;
-import net.scottnotfound.merculab.MercuLabItems;
+import net.scottnotfound.merculab.init.MercuLabBlocks;
+import net.scottnotfound.merculab.init.MercuLabItems;
 import net.scottnotfound.merculab.test.TestContainerTileEntity;
 import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 

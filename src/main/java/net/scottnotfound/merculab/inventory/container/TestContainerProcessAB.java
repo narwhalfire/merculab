@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab.inventory;
+package net.scottnotfound.merculab.inventory.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.scottnotfound.merculab.inventory.slot.TestSlotProcessABin;
+import net.scottnotfound.merculab.inventory.slot.TestSlotProcessABout;
 import net.scottnotfound.merculab.test.TestItem;
 import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 

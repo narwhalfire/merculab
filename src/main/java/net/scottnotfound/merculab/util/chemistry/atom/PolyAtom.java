@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab.atom;
+package net.scottnotfound.merculab.util.chemistry.atom;
 
 
 import java.util.*;

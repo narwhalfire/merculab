@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab;
+package net.scottnotfound.merculab.init;
 
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

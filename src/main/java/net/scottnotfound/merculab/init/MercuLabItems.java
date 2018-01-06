@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab;
+package net.scottnotfound.merculab.init;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;

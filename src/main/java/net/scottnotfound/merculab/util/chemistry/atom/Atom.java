@@ -1,7 +1,7 @@
-package net.scottnotfound.merculab.atom;
+package net.scottnotfound.merculab.util.chemistry.atom;
 
 
-import net.scottnotfound.merculab.element.IElement;
+import net.scottnotfound.merculab.util.chemistry.element.IElement;
 
 
 public class Atom implements IElement {
