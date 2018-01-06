@@ -12,7 +12,7 @@ import net.minecraft.util.NonNullList;
 import net.scottnotfound.merculab.test.TestItem;
 
 
-public class TestTileEntityProcessAB extends TileEntity implements ITickable {
+public class TestTileEntityProcessAB extends TileEntity implements ITickable, IInventory {
 
     public IInventory processABInv = new InventoryBasic("Process AB", false, 2);
     private int processTime;
@@ -161,6 +161,16 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable {
             return player.getDistanceSq((double)this.pos.getX() + 0.5d,
                     (double)this.pos.getY() + 0.5d, (double)this.pos.getZ() + 0.5d) <= 64d;
         }
+    }
+
+    @Override
+    public boolean hasCustomName() {
+        return false;
+    }
+
+    @Override
+    public boolean isItemValidForSlot(int index, ItemStack stack) {
+        return true;
     }
 
     public void openInventory(EntityPlayer player) {

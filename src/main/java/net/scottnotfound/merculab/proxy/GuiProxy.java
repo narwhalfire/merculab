@@ -24,7 +24,7 @@ public class GuiProxy implements IGuiHandler {
             return new TestContainer(player.inventory, (TestContainerTileEntity) tileEntity);
         } else if (tileEntity instanceof TestTileEntityProcessAB) {
             TestTileEntityProcessAB tileEntityProcessAB = (TestTileEntityProcessAB) tileEntity;
-            return new TestContainerProcessAB(player.inventory, tileEntityProcessAB.processABInv);
+            return new TestContainerProcessAB(player.inventory, tileEntityProcessAB);
         }
         return null;
     }
@@ -39,7 +39,7 @@ public class GuiProxy implements IGuiHandler {
             return new TestContainerGui(containerTileEntity, new TestContainer(player.inventory, containerTileEntity));
         } else  if (tileEntity instanceof TestTileEntityProcessAB) {
             TestTileEntityProcessAB tileEntityProcessAB = (TestTileEntityProcessAB) tileEntity;
-            return new TestGuiProcessAB(player.inventory, tileEntityProcessAB.processABInv);
+            return new TestGuiProcessAB(player.inventory, tileEntityProcessAB);
         }
         return null;
     }

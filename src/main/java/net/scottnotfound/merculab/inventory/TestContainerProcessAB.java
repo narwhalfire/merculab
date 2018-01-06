@@ -1,39 +1,41 @@
 package net.scottnotfound.merculab.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.test.TestItem;
+import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
 public class TestContainerProcessAB extends Container {
 
-    private IInventory tileEntityProcessAB;
+    private TestTileEntityProcessAB myTile;
     private int processTime;
     private int processTimeTotal;
 
-    public TestContainerProcessAB(IInventory playerInv, IInventory processInv) {
-        this.tileEntityProcessAB = processInv;
-        this.addSlotToContainer(new TestSlotProcessABin(processInv, 0, 56, 36));
-        this.addSlotToContainer(new TestSlotProcessABout(processInv, 1, 116, 36));
+    public TestContainerProcessAB(InventoryPlayer inventory, TileEntity tile) {
+        this.myTile = (TestTileEntityProcessAB) tile;
+        this.addSlotToContainer(new TestSlotProcessABin(myTile, 0, 56, 36));
+        this.addSlotToContainer(new TestSlotProcessABout(myTile, 1, 116, 36));
 
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 9; j++) {
-                this.addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                this.addSlotToContainer(new Slot(inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
         for (int k = 0; k < 9; ++k) {
-            this.addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
+            this.addSlotToContainer(new Slot(inventory, k, 8 + k * 18, 142));
         }
     }
 
     @Override
     public boolean canInteractWith(EntityPlayer player) {
-        return this.tileEntityProcessAB.isUsableByPlayer(player);
+        return this.myTile.isUsableByPlayer(player);
     }
 
     @Override
@@ -43,22 +45,22 @@ public class TestContainerProcessAB extends Container {
         for (int i = 0; i < this.listeners.size(); ++i) {
             IContainerListener iContainerListener = this.listeners.get(i);
 
-            if (this.processTime != this.tileEntityProcessAB.getField(0)) {
-                iContainerListener.sendWindowProperty(this, 0, this.tileEntityProcessAB.getField(0));
+            if (this.processTime != this.myTile.getField(0)) {
+                iContainerListener.sendWindowProperty(this, 0, this.myTile.getField(0));
             }
-            if (this.processTimeTotal != this.tileEntityProcessAB.getField(1)) {
-                iContainerListener.sendWindowProperty(this, 1, this.tileEntityProcessAB.getField(1));
+            if (this.processTimeTotal != this.myTile.getField(1)) {
+                iContainerListener.sendWindowProperty(this, 1, this.myTile.getField(1));
             }
         }
 
-        this.processTime = this.tileEntityProcessAB.getField(0);
-        this.processTimeTotal = this.tileEntityProcessAB.getField(1);
+        this.processTime = this.myTile.getField(0);
+        this.processTimeTotal = this.myTile.getField(1);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public void updateProgressBar(int id, int data) {
-        this.tileEntityProcessAB.setField(id, data);
+        this.myTile.setField(id, data);
     }
 
     @Override
