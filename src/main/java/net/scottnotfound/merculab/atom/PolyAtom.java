@@ -91,4 +91,20 @@ public class PolyAtom {
     public Map<Atom, Set<Bond>> getAdjacentList() {
         return Collections.unmodifiableMap(adjacentList);
     }
+
+
+    /// The following functions relate more toward the actual
+    /// chemical properties and characteristics of the molecule/atom.
+
+    public String getIUPACname() {
+        //TODO: figure out how to get the IUPAC name of the molecule (reference database?)
+        return null;
+    }
+
+    public Set<String> getReactions(PolyAtom polyAtom) {
+        //TODO: given another molecule, figure out what reactions could take place between the two.
+        //This may be more complicated since reagents change things.
+        return null;
+    }
+
 }
