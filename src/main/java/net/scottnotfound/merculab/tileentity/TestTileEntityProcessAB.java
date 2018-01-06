@@ -20,14 +20,17 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
 
     private NonNullList<ItemStack> tileProcessItemStacks = NonNullList.<ItemStack>withSize(2, ItemStack.EMPTY);
 
+    @Override
     public int getSizeInventory() {
         return this.tileProcessItemStacks.size();
     }
 
+    @Override
     public int getInventoryStackLimit() {
         return 64;
     }
 
+    @Override
     public boolean isEmpty() {
         for (ItemStack itemStack : this.tileProcessItemStacks) {
             if (itemStack.isEmpty()) {
@@ -37,18 +40,22 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
         return false;
     }
 
+    @Override
     public ItemStack getStackInSlot(int index) {
         return this.tileProcessItemStacks.get(index);
     }
 
+    @Override
     public ItemStack decrStackSize(int index, int count) {
         return ItemStackHelper.getAndSplit(this.tileProcessItemStacks, index, count);
     }
 
+    @Override
     public ItemStack removeStackFromSlot(int index) {
         return ItemStackHelper.getAndRemove(this.tileProcessItemStacks, index);
     }
 
+    @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
         ItemStack itemStack = this.tileProcessItemStacks.get(index);
         boolean flag = !stack.isEmpty() && stack.isItemEqual(itemStack) && ItemStack.areItemStackTagsEqual(stack, itemStack);
@@ -65,6 +72,7 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
         }
     }
 
+    @Override
     public String getName() {
         return "processab";
     }
@@ -173,14 +181,17 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
         return true;
     }
 
+    @Override
     public void openInventory(EntityPlayer player) {
 
     }
 
+    @Override
     public void closeInventory(EntityPlayer player) {
 
     }
 
+    @Override
     public int getField(int id) {
         switch (id) {
             case 0:
@@ -192,6 +203,7 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
         }
     }
 
+    @Override
     public void setField(int id, int value) {
         switch (id) {
             case 0:
@@ -203,10 +215,12 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
         }
     }
 
+    @Override
     public int getFieldCount() {
         return 4;
     }
 
+    @Override
     public void clear() {
         this.tileProcessItemStacks.clear();
     }
