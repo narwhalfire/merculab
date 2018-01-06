@@ -89,7 +89,7 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
         if (itemStack.isEmpty()) {
             return false;
         } else {
-            if (itemStack != itemStacka) {
+            if (itemStack.getItem() != itemStacka.getItem()) {
                 return false;
             } else if (itemStack1.isEmpty()) {
                 return true;
