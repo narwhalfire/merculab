@@ -17,30 +17,32 @@ import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 public class GuiProxy implements IGuiHandler {
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getServerGuiElement(int guiid, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x,y,z);
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof TestContainerTileEntity) {
+
+        if (guiid == 1) {
             return new TestContainer(player.inventory, (TestContainerTileEntity) tileEntity);
-        } else if (tileEntity instanceof TestTileEntityProcessAB) {
-            TestTileEntityProcessAB tileEntityProcessAB = (TestTileEntityProcessAB) tileEntity;
-            return new TestContainerProcessAB(player.inventory, tileEntityProcessAB);
+        } else if (guiid == 2) {
+            return new TestContainerProcessAB(player.inventory, tileEntity);
         }
+
         return null;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+    public Object getClientGuiElement(int guiid, EntityPlayer player, World world, int x, int y, int z) {
         BlockPos pos = new BlockPos(x,y,z);
         TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof TestContainerTileEntity) {
-            TestContainerTileEntity containerTileEntity = (TestContainerTileEntity) tileEntity;
-            return new TestContainerGui(containerTileEntity, new TestContainer(player.inventory, containerTileEntity));
-        } else  if (tileEntity instanceof TestTileEntityProcessAB) {
-            TestTileEntityProcessAB tileEntityProcessAB = (TestTileEntityProcessAB) tileEntity;
-            return new TestGuiProcessAB(player.inventory, tileEntityProcessAB);
+
+        if (guiid == 1) {
+            return new TestContainerGui((TestContainerTileEntity) tileEntity,
+                    new TestContainer(player.inventory, (TestContainerTileEntity) tileEntity));
+        } else if (guiid == 2) {
+            return new TestGuiProcessAB(player.inventory, tileEntity);
         }
+
         return null;
     }
 }
