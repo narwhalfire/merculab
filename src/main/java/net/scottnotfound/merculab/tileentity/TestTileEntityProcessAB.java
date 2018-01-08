@@ -93,8 +93,8 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
                 return false;
             } else if (itemStack1.isEmpty()) {
                 return true;
-            } else if (itemStack.getCount() + itemStack1.getCount() <= this.getInventoryStackLimit()
-                    && itemStack.getCount() + itemStack1.getCount() <= itemStack1.getMaxStackSize()) {
+            } else if (1 + itemStack1.getCount() <= this.getInventoryStackLimit()
+                    && 1 + itemStack1.getCount() <= itemStack1.getMaxStackSize()) {
                 return true;
             } else {
                 return itemStack.getCount() + itemStack1.getCount() <= itemStack.getMaxStackSize();
@@ -112,7 +112,7 @@ public class TestTileEntityProcessAB extends TileEntity implements ITickable, II
             if (itemStack1.isEmpty()) {
                 this.tileProcessItemStacks.set(1, itemStackb.copy());
             } else if (itemStack1.getItem() == itemStackb.getItem()) {
-                itemStack1.grow(itemStack.getCount());
+                itemStack1.grow(1);
             }
 
             itemStack.shrink(1);
