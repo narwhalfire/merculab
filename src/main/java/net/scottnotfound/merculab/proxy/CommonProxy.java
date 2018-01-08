@@ -63,6 +63,7 @@ public class CommonProxy {
         event.getRegistry().register(MercuLabItems.testItem);
         event.getRegistry().register(MercuLabItems.testItemA);
         event.getRegistry().register(MercuLabItems.testItemB);
+        event.getRegistry().register(MercuLabItems.Vial);
         event.getRegistry().register(new ItemBlock(MercuLabBlocks.testBlock)
                 .setRegistryName(MercuLabBlocks.testBlock.getRegistryName()));
         event.getRegistry().register(new ItemBlock(MercuLabBlocks.testContainerBlock)

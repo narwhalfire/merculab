@@ -1,8 +1,13 @@
 package net.scottnotfound.merculab.init;
 
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.scottnotfound.merculab.item.ItemVial;
 import net.scottnotfound.merculab.test.TestItem;
 
 public class MercuLabItems {
@@ -15,6 +20,16 @@ public class MercuLabItems {
 
     @GameRegistry.ObjectHolder("merculab:testB")
     public static TestItem testItemB = TestItem.b;
+
+    @GameRegistry.ObjectHolder("merculab:vial")
+    public static ItemVial Vial = new ItemVial(Blocks.DIAMOND_ORE);
+
+    public static final CreativeTabs CHEM = new CreativeTabs("chem") {
+        @Override
+        public ItemStack getTabIconItem() {
+            return new ItemStack(Items.SUGAR);
+        }
+    };
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {
