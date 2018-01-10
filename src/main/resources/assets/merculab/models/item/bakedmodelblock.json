@@ -1,0 +1,10 @@
+{
+  "parent": "merculab:block/bakedmodelblock",
+  "display": {
+    "thirdperson": {
+      "rotation": [0, 0, 0],
+      "translation": [0, 0, 0],
+      "scale": [0.375, 0.375, 0.375]
+    }
+  }
+}

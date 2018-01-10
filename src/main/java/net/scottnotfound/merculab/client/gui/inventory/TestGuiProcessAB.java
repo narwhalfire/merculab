@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab.inventory.gui;
+package net.scottnotfound.merculab.client.gui.inventory;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -9,7 +9,7 @@ import net.scottnotfound.merculab.inventory.container.TestContainerProcessAB;
 
 public class TestGuiProcessAB extends GuiContainer {
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(MercuLab.MODID, "Textures/gui/testcontainer");
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(MercuLab.MODID, "textures/gui/testcontainer");
 
 
     public TestGuiProcessAB(InventoryPlayer inventory, TileEntity tile) {

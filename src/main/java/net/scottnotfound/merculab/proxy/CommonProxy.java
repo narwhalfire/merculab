@@ -1,6 +1,5 @@
 package net.scottnotfound.merculab.proxy;
 
-// imports
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -22,8 +21,6 @@ import net.scottnotfound.merculab.test.TestContainerTileEntity;
 import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
 import java.io.File;
-
-import static net.scottnotfound.merculab.MercuLab.instance;
 
 
 @Mod.EventBusSubscriber
@@ -56,6 +53,7 @@ public class CommonProxy {
         event.getRegistry().register(MercuLabBlocks.testBlock);
         event.getRegistry().register(MercuLabBlocks.testContainerBlock);
         event.getRegistry().register(MercuLabBlocks.testBlockProcessAB);
+        event.getRegistry().register(MercuLabBlocks.bakedModelBlock);
     }
 
     @SubscribeEvent
@@ -70,10 +68,12 @@ public class CommonProxy {
                 .setRegistryName(MercuLabBlocks.testContainerBlock.getRegistryName()));
         event.getRegistry().register(new ItemBlock(MercuLabBlocks.testBlockProcessAB)
                 .setRegistryName(MercuLabBlocks.testBlockProcessAB.getRegistryName()));
+        event.getRegistry().register(new ItemBlock(MercuLabBlocks.bakedModelBlock)
+                .setRegistryName(MercuLabBlocks.bakedModelBlock.getRegistryName()));
     }
 
     public static void registerOthers() {
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiProxy());
+        NetworkRegistry.INSTANCE.registerGuiHandler(MercuLab.instance, new GuiProxy());
 
         // tile entities
         GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MODID + "_testcontainerblock");
