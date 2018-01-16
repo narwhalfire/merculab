@@ -1,6 +1,7 @@
 package net.scottnotfound.merculab;
 
 // imports
+
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -8,13 +9,14 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.scottnotfound.merculab.proxy.CommonProxy;
+import uk.ac.cam.ch.wwmm.opsin.NameToStructure;
 
-@Mod(modid = MercuLab.MODID, name = MercuLab.MODNAME, version = MercuLab.VERSION)
+@Mod(modid = MercuLab.MOD_ID, name = MercuLab.MOD_NAME, version = MercuLab.MOD_VERSION)
 public class MercuLab {
 
-    public static final String MODID = "merculab";
-    public static final String MODNAME = "MercuLab";
-    public static final String VERSION = "0.0.1";
+    public static final String MOD_ID = "merculab";
+    public static final String MOD_NAME = "MercuLab";
+    public static final String MOD_VERSION = "0.0.1";
 
     @SidedProxy(clientSide = "net.scottnotfound.merculab.proxy.ClientProxy",
             serverSide = "net.scottnotfound.merculab.proxy.ServerProxy")
@@ -24,6 +26,7 @@ public class MercuLab {
     public static MercuLab instance;
 
     public static org.apache.logging.log4j.Logger logger;
+    public static final uk.ac.cam.ch.wwmm.opsin.NameToStructure NAME_TO_STRUCTURE = NameToStructure.getInstance();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {

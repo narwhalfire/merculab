@@ -23,7 +23,6 @@ import net.scottnotfound.merculab.MercuLab;
 import net.scottnotfound.merculab.block.property.UnlistedPropertyBlockAvailable;
 import net.scottnotfound.merculab.client.render.block.model.TestBakedModel;
 import net.scottnotfound.merculab.init.MercuLabBlocks;
-import net.scottnotfound.merculab.test.TestBlock;
 
 public class TestBlockbakedmodel extends Block {
 
@@ -42,7 +41,7 @@ public class TestBlockbakedmodel extends Block {
 
     public TestBlockbakedmodel() {
         super(Material.ROCK);
-        setUnlocalizedName(MercuLab.MODID + ".bakedmodelblock");
+        setUnlocalizedName(MercuLab.MOD_ID + ".bakedmodelblock");
         setRegistryName("bakedmodelblock");
     }
 
@@ -59,7 +58,7 @@ public class TestBlockbakedmodel extends Block {
 
     @SideOnly(Side.CLIENT)
     public void initItemModel() {
-        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(MercuLab.MODID, "bakedmodelblock"));
+        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(MercuLab.MOD_ID, "bakedmodelblock"));
         ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
         final int DEFAULT_ITEM_SUBTYPE = 0;
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);

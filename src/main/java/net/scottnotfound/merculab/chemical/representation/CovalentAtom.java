@@ -1,10 +1,10 @@
-package net.scottnotfound.merculab.util.chemistry.atom;
+package net.scottnotfound.merculab.chemical.representation;
 
 
-import net.scottnotfound.merculab.util.chemistry.element.IElement;
+import net.scottnotfound.merculab.chemical.element.IElement;
 
 
-public class Atom implements IElement {
+public class CovalentAtom implements IElement {
     /**
      * This class is part of the Graph representation of a molecule. It represents the vertex of a graph.
      */
@@ -12,17 +12,16 @@ public class Atom implements IElement {
     private int uniqueLabel;
 
 
-    public Atom(int uniqueLabel) {
-        super();
+    public CovalentAtom(int uniqueLabel) {
         this.uniqueLabel = uniqueLabel;
     }
 
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (!(object instanceof Atom)) return false;
+        if (!(object instanceof CovalentAtom)) return false;
 
-        Atom n_object = (Atom) object;
+        CovalentAtom n_object = (CovalentAtom) object;
         return n_object.uniqueLabel == uniqueLabel;
     }
 

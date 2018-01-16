@@ -76,7 +76,7 @@ public class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(MercuLab.instance, new GuiProxy());
 
         // tile entities
-        GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MODID + "_testcontainerblock");
-        GameRegistry.registerTileEntity(TestTileEntityProcessAB.class, MercuLab.MODID + "_processab");
+        GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MOD_ID + "_testcontainerblock");
+        GameRegistry.registerTileEntity(TestTileEntityProcessAB.class, MercuLab.MOD_ID + "_processab");
     }
 }

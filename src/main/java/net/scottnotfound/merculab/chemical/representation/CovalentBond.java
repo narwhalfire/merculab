@@ -1,6 +1,6 @@
-package net.scottnotfound.merculab.util.chemistry.atom;
+package net.scottnotfound.merculab.chemical.representation;
 
-public class Bond {
+public class CovalentBond {
     /**
      * This class is a part of the Graph representation of a molecule. It represents the edge of a graph.
      */
@@ -8,15 +8,15 @@ public class Bond {
     private static final int DEFAULT_WEIGHT = 1;
 
 
-    Atom atom_a;
-    Atom atom_b;
+    CovalentAtom atom_a;
+    CovalentAtom atom_b;
     int weight;
 
-    public Bond(Atom atom_a, Atom atom_b) {
+    public CovalentBond(CovalentAtom atom_a, CovalentAtom atom_b) {
         this(atom_a, atom_b, DEFAULT_WEIGHT);
     }
 
-    public Bond(Atom atom_a, Atom atom_b, int weight) {
+    public CovalentBond(CovalentAtom atom_a, CovalentAtom atom_b, int weight) {
         super();
         this.atom_a = atom_a;
         this.atom_b = atom_b;
@@ -26,9 +26,9 @@ public class Bond {
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
-        if (!(object instanceof Bond)) return false;
+        if (!(object instanceof CovalentBond)) return false;
 
-        Bond n_object = (Bond) object;
+        CovalentBond n_object = (CovalentBond) object;
         return n_object.atom_a.equals(this.atom_a) && n_object.atom_b.equals(this.atom_b) && n_object.weight == this.weight;
     }
 

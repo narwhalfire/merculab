@@ -25,7 +25,7 @@ public class TestBlockProcessAB extends Block implements ITileEntityProvider {
     public TestBlockProcessAB() {
         super(Material.ROCK);
         setRegistryName("processab");
-        setUnlocalizedName(MercuLab.MODID + ".processab");
+        setUnlocalizedName(MercuLab.MOD_ID + ".processab");
     }
 
     @SideOnly(Side.CLIENT)

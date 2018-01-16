@@ -2,7 +2,6 @@ package net.scottnotfound.merculab.item;
 
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPortal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +34,7 @@ public class ItemVial extends Item {
 
     public ItemVial(Block containedBlock) {
         this.setRegistryName("vial");
-        this.setUnlocalizedName(MercuLab.MODID + ".vial");
+        this.setUnlocalizedName(MercuLab.MOD_ID + ".vial");
 
         this.maxStackSize = 1;
         this.containedBlock = containedBlock;

@@ -9,7 +9,7 @@ import net.scottnotfound.merculab.inventory.container.TestContainerProcessAB;
 
 public class TestGuiProcessAB extends GuiContainer {
 
-    private static final ResourceLocation BACKGROUND = new ResourceLocation(MercuLab.MODID, "textures/gui/testcontainer");
+    private static final ResourceLocation BACKGROUND = new ResourceLocation(MercuLab.MOD_ID, "textures/gui/testcontainer");
 
 
     public TestGuiProcessAB(InventoryPlayer inventory, TileEntity tile) {

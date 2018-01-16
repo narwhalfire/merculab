@@ -14,7 +14,7 @@ public class TestBlock extends Block {
     public TestBlock() {
         super(Material.AIR);
         setRegistryName("test_block");
-        setUnlocalizedName(MercuLab.MODID + ".test_block");
+        setUnlocalizedName(MercuLab.MOD_ID + ".test_block");
     }
 
     @SideOnly(Side.CLIENT)

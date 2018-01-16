@@ -28,7 +28,7 @@ public class TestModel implements IModel {
 
     @Override
     public Collection<ResourceLocation> getTextures() {
-        return ImmutableSet.of(new ResourceLocation(MercuLab.MODID, "blocks/bakedmodeltexture"));
+        return ImmutableSet.of(new ResourceLocation(MercuLab.MOD_ID, "blocks/bakedmodeltexture"));
     }
 
     @Override

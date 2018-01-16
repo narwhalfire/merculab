@@ -15,7 +15,7 @@ public class TestItem extends Item {
 
     public TestItem(String name) {
         setRegistryName(name);
-        setUnlocalizedName(MercuLab.MODID + "." + name);
+        setUnlocalizedName(MercuLab.MOD_ID + "." + name);
     }
 
     @SideOnly(Side.CLIENT)

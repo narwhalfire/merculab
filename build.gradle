@@ -47,6 +47,10 @@ repositories {
         name = "JEI"
         url = "http://dvs1.progwml6.com/files/maven/"
     }
+    maven {
+        name = "AE2"
+        url = "..\\..\\..\\..\\..\\libraries\\minecraft\\applied energistics\\"
+    }
 }
 
 dependencies {
@@ -78,7 +82,7 @@ dependencies {
     deobfCompile "cofh:ThermalDynamics:1.12.2-2.3.10.4:universal"
     deobfCompile "cofh:ThermalFoundation:1.12.2-2.3.10.6:universal"
     deobfCompile "cofh:ThermalExpansion:1.12.2-5.3.10.12:universal"
-
+    deobfCompile "appeng:appliedenergistics2:rv5-stable-4"
 }
 
 processResources {

@@ -24,7 +24,7 @@ public class TestContainerBlock extends Block implements ITileEntityProvider {
     public TestContainerBlock() {
         super(Material.ROCK);
         setRegistryName("testcontainerblock");
-        setUnlocalizedName(MercuLab.MODID + ".testcontainerblock");
+        setUnlocalizedName(MercuLab.MOD_ID + ".testcontainerblock");
     }
 
     @SideOnly(Side.CLIENT)

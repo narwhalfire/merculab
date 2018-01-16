@@ -21,14 +21,14 @@ import java.util.function.Function;
 public class TestBakedModel implements IBakedModel {
 
     public static final ModelResourceLocation TEST_BAKED_MODEL = new
-            ModelResourceLocation(MercuLab.MODID + ":bakedmodelblock");
+            ModelResourceLocation(MercuLab.MOD_ID + ":bakedmodelblock");
 
     private TextureAtlasSprite sprite;
     private VertexFormat format;
 
     public TestBakedModel(IModelState state, VertexFormat format, Function<ResourceLocation, TextureAtlasSprite> bakedTextureGetter) {
         this.format = format;
-        sprite = bakedTextureGetter.apply(new ResourceLocation(MercuLab.MODID, "blocks/bakedmodeltexture"));
+        sprite = bakedTextureGetter.apply(new ResourceLocation(MercuLab.MOD_ID, "blocks/bakedmodeltexture"));
     }
 
     private void putVertex(UnpackedBakedQuad.Builder builder, Vec3d normal, double x, double y, double z, float u, float v) {

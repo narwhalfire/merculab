@@ -7,7 +7,7 @@ import net.scottnotfound.merculab.MercuLab;
 public class TestContainerGui extends GuiContainer {
 
 
-    private static final ResourceLocation background = new ResourceLocation(MercuLab.MODID, "textures/gui/testcontainer.png");
+    private static final ResourceLocation background = new ResourceLocation(MercuLab.MOD_ID, "textures/gui/testcontainer.png");
 
     public TestContainerGui(TestContainerTileEntity tileEntity, TestContainer container) {
         super(container);
