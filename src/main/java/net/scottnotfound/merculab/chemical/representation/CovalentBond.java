@@ -1,25 +1,19 @@
 package net.scottnotfound.merculab.chemical.representation;
 
-public class CovalentBond {
+public class CovalentBond extends Bond {
     /**
      * This class is a part of the Graph representation of a molecule. It represents the edge of a graph.
      */
 
     private static final int DEFAULT_WEIGHT = 1;
-
-
-    CovalentAtom atom_a;
-    CovalentAtom atom_b;
-    int weight;
+    private int weight;
 
     public CovalentBond(CovalentAtom atom_a, CovalentAtom atom_b) {
         this(atom_a, atom_b, DEFAULT_WEIGHT);
     }
 
     public CovalentBond(CovalentAtom atom_a, CovalentAtom atom_b, int weight) {
-        super();
-        this.atom_a = atom_a;
-        this.atom_b = atom_b;
+        super(atom_a, atom_b);
         this.weight = weight;
     }
 

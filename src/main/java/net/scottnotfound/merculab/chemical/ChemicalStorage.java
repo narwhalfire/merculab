@@ -1,12 +1,12 @@
 package net.scottnotfound.merculab.chemical;
 
-import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChemicalStorage implements IChemicalStorage {
 
-    private List<PairChemicalAmount> chemicalAmounts = null;
+    private Map<String, ChemicalAmount> chemicalAmounts = new HashMap<>();
 
     public ChemicalStorage() {}
 
@@ -31,37 +31,24 @@ public class ChemicalStorage implements IChemicalStorage {
     }
 
     @Override
-    public Collection<PairChemicalAmount> getChemicalAmountsStored() {
-        return Collections.unmodifiableCollection(chemicalAmounts);
+    public Map<String, ChemicalAmount> getChemicalAmountsStored() {
+        return Collections.unmodifiableMap(chemicalAmounts);
     }
 
     @Override
-    public Collection<PairChemicalAmount> recieveChemicals(Collection<PairChemicalAmount> maxTransferred, boolean simulate) {
-
-        long transferVolume = 0;
-        float transferFraction = 1.0f;
-        for (PairChemicalAmount transfer : maxTransferred) {
-                    //todo: finish this
-        }
-
-
-        for (PairChemicalAmount pairChemicalAmount : chemicalAmounts) {
-            for (PairChemicalAmount transfer : maxTransferred) {
-
-            }
-        }
+    public Map<String, ChemicalAmount> recieveChemicals(Map<String, ChemicalAmount> maxTransferred, boolean simulate) {
 
 
         return null;
     }
 
     @Override
-    public Collection<PairChemicalAmount> exctractChemicals(Collection<PairChemicalAmount> maxTransferred, boolean simulate) {
+    public Map<String, ChemicalAmount> exctractChemicals(Map<String, ChemicalAmount> maxTransferred, boolean simulate) {
         return null;
     }
 
     @Override
-    public Collection<PairChemicalAmount> extractVolume(long volume) {
+    public Map<String, ChemicalAmount> extractVolume(long volume) {
         return null;
     }
 }

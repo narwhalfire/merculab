@@ -4,7 +4,7 @@ package net.scottnotfound.merculab.chemical.representation;
 import net.scottnotfound.merculab.chemical.element.IElement;
 
 
-public class CovalentAtom implements IElement {
+public class CovalentAtom extends Atom implements IElement {
     /**
      * This class is part of the Graph representation of a molecule. It represents the vertex of a graph.
      */

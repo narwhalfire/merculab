@@ -1,6 +1,6 @@
 package net.scottnotfound.merculab.chemical;
 
-import java.util.Collection;
+import java.util.Map;
 
 public interface IChemicalStorage {
 
@@ -32,7 +32,7 @@ public interface IChemicalStorage {
      *
      * @return the amounts of all chemicals stored
      */
-    Collection<PairChemicalAmount> getChemicalAmountsStored();
+    Map<String, ChemicalAmount> getChemicalAmountsStored();
 
     /**
      *
@@ -40,7 +40,7 @@ public interface IChemicalStorage {
      * @param simulate transfer is simulated and does not actually occur
      * @return the amounts of chemicals received
      */
-    Collection<PairChemicalAmount> recieveChemicals(Collection<PairChemicalAmount> maxTransferred, boolean simulate);
+    Map<String, ChemicalAmount> recieveChemicals(Map<String, ChemicalAmount> maxTransferred, boolean simulate);
 
     /**
      *
@@ -48,13 +48,13 @@ public interface IChemicalStorage {
      * @param simulate transfer is simulated and does not actually occur
      * @return the amounts of chemicals extracted
      */
-    Collection<PairChemicalAmount> exctractChemicals(Collection<PairChemicalAmount> maxTransferred, boolean simulate);
+    Map<String, ChemicalAmount> exctractChemicals(Map<String, ChemicalAmount> maxTransferred, boolean simulate);
 
     /**
      *
      * @param volume volume of stuff to be extracted in micro liters
      * @return the amounts of chemicals extracted
      */
-    Collection<PairChemicalAmount> extractVolume(long volume);
+    Map<String, ChemicalAmount> extractVolume(long volume);
 
 }

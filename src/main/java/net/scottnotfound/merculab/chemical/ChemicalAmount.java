@@ -1,6 +1,6 @@
 package net.scottnotfound.merculab.chemical;
 
-public class PairChemicalAmount {
+public class ChemicalAmount {
     public Chemical chemical;
     public long amount;
     /**
@@ -8,7 +8,7 @@ public class PairChemicalAmount {
      * @param chemical the chemical in storage
      * @param amount the amount of the chemical in nano moles
      */
-    public PairChemicalAmount(Chemical chemical, long amount) {
+    public ChemicalAmount(Chemical chemical, long amount) {
         this.chemical = chemical;
         this.amount = amount;
     }
