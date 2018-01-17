@@ -7,7 +7,8 @@ public class Bond {
 
 
     public Bond() {
-
+        this.atom_a = null;
+        this.atom_b = null;
     }
 
     public Bond(Atom atom_a, Atom atom_b) {
