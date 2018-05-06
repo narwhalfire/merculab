@@ -11,13 +11,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
-import javax.annotation.Nullable;
 import java.util.Locale;
 
 /**
  *  This is the class that will represent any kind of chemical.
  */
-public class Chemical implements IForgeRegistryEntry
+public class Chemical extends IForgeRegistryEntry.Impl<Chemical>
 {
 
     /** The name of the registry for Chemicals. */
@@ -145,24 +144,4 @@ public class Chemical implements IForgeRegistryEntry
     public EnumRarity       getRarity           (World world, BlockPos pos) {return getRarity();}
     public ResourceLocation getAsAtomicStructure(World world, BlockPos pos) {return getAsAtomicStructure();}
     public ResourceLocation getAsItem           (World world, BlockPos pos) {return getAsItem();}
-
-    @Override
-    public Chemical setRegistryName(ResourceLocation name)
-    {
-        this.registry = name;
-        return this;
-    }
-
-    @Nullable
-    @Override
-    public ResourceLocation getRegistryName()
-    {
-        return this.registry;
-    }
-
-    @Override
-    public Class getRegistryType()
-    {
-        return Chemical.class;
-    }
 }
