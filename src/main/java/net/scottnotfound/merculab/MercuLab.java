@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.scottnotfound.merculab.proxy.CommonProxy;
-import uk.ac.cam.ch.wwmm.opsin.NameToStructure;
 
 @Mod(modid = MercuLab.MOD_ID, name = MercuLab.MOD_NAME, version = MercuLab.MOD_VERSION)
 public class MercuLab {
@@ -26,7 +25,6 @@ public class MercuLab {
     public static MercuLab instance;
 
     public static org.apache.logging.log4j.Logger logger;
-    public static final uk.ac.cam.ch.wwmm.opsin.NameToStructure NAME_TO_STRUCTURE = NameToStructure.getInstance();
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
