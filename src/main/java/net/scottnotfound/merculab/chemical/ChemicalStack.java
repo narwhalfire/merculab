@@ -93,7 +93,7 @@ public class ChemicalStack
         return nbt;
     }
 
-    private Chemical getChemical()
+    public Chemical getChemical()
     {
         return chemicalDelegate.get();
     }
