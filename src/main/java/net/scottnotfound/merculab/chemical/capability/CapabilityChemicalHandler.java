@@ -1,5 +1,6 @@
 package net.scottnotfound.merculab.chemical.capability;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -10,6 +11,7 @@ import net.scottnotfound.merculab.chemical.ChemicalContainer;
 import net.scottnotfound.merculab.chemical.ChemicalStack;
 import net.scottnotfound.merculab.chemical.IChemicalContainer;
 import net.scottnotfound.merculab.chemical.capability.template.ChemicalHandlerItemStack;
+import net.scottnotfound.merculab.init.MercuLabItems;
 
 public class CapabilityChemicalHandler
 {
@@ -23,10 +25,10 @@ public class CapabilityChemicalHandler
     {
         CapabilityManager.INSTANCE.register(IChemicalHandler.class,
                                             new DefaultChemicalHandlerStorage<>(),
-                                            () -> new ChemicalContainer());
+                                            () -> new ChemicalContainer(0));
         CapabilityManager.INSTANCE.register(IChemicalHandlerItem.class,
                                             new DefaultChemicalHandlerStorage<>(),
-                                            () -> new ChemicalHandlerItemStack());
+                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabItems.Vial), 0));
     }
 
     private static class DefaultChemicalHandlerStorage<T extends IChemicalHandler> implements Capability.IStorage<T>
