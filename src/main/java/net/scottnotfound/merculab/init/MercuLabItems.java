@@ -1,9 +1,9 @@
 package net.scottnotfound.merculab.init;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -22,7 +22,7 @@ public class MercuLabItems {
     public static TestItem testItemB = TestItem.b;
 
     @GameRegistry.ObjectHolder("merculab:vial")
-    public static ItemVial Vial = new ItemVial(Blocks.DIAMOND_ORE);
+    public static ItemVial Vial = new ItemVial(Fluid.BUCKET_VOLUME, null);
 
     public static final CreativeTabs CHEM = new CreativeTabs("chem") {
         @Override
