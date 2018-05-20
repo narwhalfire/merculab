@@ -69,11 +69,11 @@ public class ChemicalStack
         }
         String chemicalName = nbt.getString("ChemicalName");
         ResourceLocation resourceLocation = new ResourceLocation(MercuLab.MOD_ID, chemicalName);
-        if (Chemical.REGISTRY.getObject(resourceLocation) == null)
+        if (GameRegistry.findRegistry(Chemical.class).getValue(resourceLocation) == null)
         {
             return null;
         }
-        ChemicalStack stack = new ChemicalStack(Chemical.REGISTRY.getObject(resourceLocation), nbt.getInteger("Amount"));
+        ChemicalStack stack = new ChemicalStack(GameRegistry.findRegistry(Chemical.class).getValue(resourceLocation), nbt.getInteger("Amount"));
         if (nbt.hasKey("Tag"))
         {
             stack.tag = nbt.getCompoundTag("Tag");

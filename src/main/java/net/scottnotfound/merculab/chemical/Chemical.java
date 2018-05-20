@@ -6,11 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.RegistryNamespaced;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.registries.GameData;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.Locale;
@@ -20,8 +18,6 @@ import java.util.Locale;
  */
 public class Chemical extends IForgeRegistryEntry.Impl<Chemical>
 {
-
-    public static final RegistryNamespaced<ResourceLocation, Chemical> REGISTRY = GameData.getWrapper(Chemical.class);
 
     /** The name of the registry for Chemicals. */
     private ResourceLocation registry = new ResourceLocation("merculab:chemical_registry");
@@ -51,6 +47,7 @@ public class Chemical extends IForgeRegistryEntry.Impl<Chemical>
         this.unlocalizedName = chemicalName;
         this.asAtomicStructure = asAtomicStructure;
         this.asItem = asItem;
+        this.setRegistryName(chemicalName);
     }
 
     public Chemical setUnlocalizedName(String unlocalizedName)

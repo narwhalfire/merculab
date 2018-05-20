@@ -3,6 +3,7 @@ package net.scottnotfound.merculab.proxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,9 +14,12 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.RegistryBuilder;
 import net.scottnotfound.merculab.Config;
 import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.chemical.Chemical;
 import net.scottnotfound.merculab.init.MercuLabBlocks;
+import net.scottnotfound.merculab.init.MercuLabChemicals;
 import net.scottnotfound.merculab.init.MercuLabItems;
 import net.scottnotfound.merculab.test.TestContainerTileEntity;
 import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
@@ -78,5 +82,15 @@ public class CommonProxy {
         // tile entities
         GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MOD_ID + "_testcontainerblock");
         GameRegistry.registerTileEntity(TestTileEntityProcessAB.class, MercuLab.MOD_ID + "_processab");
+    }
+
+    @SubscribeEvent
+    public static void registerChemicals(RegistryEvent.Register<Chemical> event) {
+        event.getRegistry().register(MercuLabChemicals.silicon_dioxide);
+    }
+
+    @SubscribeEvent
+    public static void registerRegistries(RegistryEvent.NewRegistry event) {
+        new RegistryBuilder().setName(new ResourceLocation("merculab:chemical_registry")).setType(Chemical.class).create();
     }
 }

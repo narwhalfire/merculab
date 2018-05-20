@@ -32,6 +32,7 @@ public class ItemVial extends Item
         this.containedChemical = chemical;
         this.maxStackSize = 1;
         this.setCreativeTab(CreativeTabs.MISC);
+        this.setRegistryName("vial");
     }
 
     /**
