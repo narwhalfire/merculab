@@ -18,6 +18,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 import net.scottnotfound.merculab.Config;
 import net.scottnotfound.merculab.MercuLab;
 import net.scottnotfound.merculab.chemical.Chemical;
+import net.scottnotfound.merculab.chemical.capability.TileChemicalHandler;
 import net.scottnotfound.merculab.init.MercuLabBlocks;
 import net.scottnotfound.merculab.init.MercuLabChemicals;
 import net.scottnotfound.merculab.init.MercuLabItems;
@@ -58,6 +59,7 @@ public class CommonProxy {
         event.getRegistry().register(MercuLabBlocks.testContainerBlock);
         event.getRegistry().register(MercuLabBlocks.testBlockProcessAB);
         event.getRegistry().register(MercuLabBlocks.bakedModelBlock);
+        event.getRegistry().register(MercuLabBlocks.Vial);
     }
 
     @SubscribeEvent
@@ -82,6 +84,7 @@ public class CommonProxy {
         // tile entities
         GameRegistry.registerTileEntity(TestContainerTileEntity.class, MercuLab.MOD_ID + "_testcontainerblock");
         GameRegistry.registerTileEntity(TestTileEntityProcessAB.class, MercuLab.MOD_ID + "_processab");
+        GameRegistry.registerTileEntity(TileChemicalHandler.class, MercuLab.MOD_ID + "_vial_block");
     }
 
     @SubscribeEvent

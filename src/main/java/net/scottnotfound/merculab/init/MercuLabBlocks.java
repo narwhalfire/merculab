@@ -5,6 +5,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.block.TestBlockProcessAB;
 import net.scottnotfound.merculab.block.TestBlockbakedmodel;
+import net.scottnotfound.merculab.block.glassware.BlockVial;
 import net.scottnotfound.merculab.test.TestBlock;
 import net.scottnotfound.merculab.test.TestContainerBlock;
 
@@ -21,6 +22,9 @@ public class MercuLabBlocks {
 
     @GameRegistry.ObjectHolder("merculab:bakedmodelblock")
     public static TestBlockbakedmodel bakedModelBlock = new TestBlockbakedmodel();
+
+    @GameRegistry.ObjectHolder("merculab:vial")
+    public static BlockVial Vial = new BlockVial(1000);
 
 
     @SideOnly(Side.CLIENT)

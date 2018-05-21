@@ -10,7 +10,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.client.render.block.model.TestBakedModelLoader;
 import net.scottnotfound.merculab.init.MercuLabBlocks;
-import net.scottnotfound.merculab.init.MercuLabCompounds;
 import net.scottnotfound.merculab.init.MercuLabItems;
 
 @SideOnly(Side.CLIENT)
@@ -33,6 +32,5 @@ public class ClientProxy extends CommonProxy {
     public static void registerModels(ModelRegistryEvent event) {
         MercuLabBlocks.initModels();
         MercuLabItems.initModels();
-        MercuLabCompounds.initModels();
     }
 }

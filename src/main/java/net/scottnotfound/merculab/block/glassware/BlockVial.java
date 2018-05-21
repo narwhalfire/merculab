@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.scottnotfound.merculab.chemical.capability.TileChemicalHandler;
 import net.scottnotfound.merculab.init.MercuLabItems;
 
-import javax.annotation.Nullable;
 import java.util.Random;
 
 public class BlockVial extends Block implements ITileEntityProvider
@@ -28,6 +27,7 @@ public class BlockVial extends Block implements ITileEntityProvider
     {
         super(Material.GLASS);
         this.capacity = capacity;
+        this.setRegistryName("merculab:vial_block");
     }
 
     /**
@@ -67,16 +67,26 @@ public class BlockVial extends Block implements ITileEntityProvider
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity, ItemStack itemStack)
     {
-        ItemStack stack = new ItemStack(getItemDropped(state, new Random(), 0));
-        NBTTagCompound tag = tileEntity.writeToNBT(new NBTTagCompound());
-        stack.setTagCompound(tag);
+        ItemStack newStack = new ItemStack(getItemDropped(state, new Random(), 0));
 
+        NBTTagCompound tileEntityTag = new NBTTagCompound();
+
+        if (tileEntity != null)
+        {
+            tileEntityTag = tileEntity.writeToNBT(tileEntityTag);
+        }
+
+        tileEntityTag.setInteger("x", 0);
+        tileEntityTag.setInteger("y", 0);
+        tileEntityTag.setInteger("z", 0);
+
+        newStack.setTagInfo("BlockEntityTag", tileEntityTag);
+        spawnAsEntity(worldIn, pos, newStack);
     }
 
 
 
 
-    @Nullable
     @Override
     public TileEntity createNewTileEntity(World worldIn, int meta)
     {
