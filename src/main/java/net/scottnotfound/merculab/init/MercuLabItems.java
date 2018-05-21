@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.item.ItemVial;
+import net.scottnotfound.merculab.item.glassware.ItemVial;
 import net.scottnotfound.merculab.test.TestItem;
 
 public class MercuLabItems {
@@ -22,7 +22,7 @@ public class MercuLabItems {
     public static TestItem testItemB = TestItem.b;
 
     @GameRegistry.ObjectHolder("merculab:vial")
-    public static ItemVial Vial = new ItemVial(Fluid.BUCKET_VOLUME, null);
+    public static ItemVial Vial = new ItemVial(Fluid.BUCKET_VOLUME);
 
     public static final CreativeTabs CHEM = new CreativeTabs("chem") {
         @Override

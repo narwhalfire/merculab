@@ -1,5 +1,10 @@
 package net.scottnotfound.merculab.item;
 
-public class ItemSpatula
+import net.minecraft.item.Item;
+
+public class ItemSpatula extends Item
 {
+
+
+
 }
