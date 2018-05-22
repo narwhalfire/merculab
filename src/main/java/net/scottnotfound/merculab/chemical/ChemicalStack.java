@@ -17,22 +17,17 @@ import javax.annotation.Nullable;
  * NOTE: Equality is based on the chemical, not the amount.
  *
  */
-public class ChemicalStack
-{
+public class ChemicalStack {
 
     public int amount;
     public NBTTagCompound tag;
     private IRegistryDelegate<Chemical> chemicalDelegate;
 
-    public ChemicalStack(Chemical chemical, int amount)
-    {
-        if (chemical == null)
-        {
+    public ChemicalStack(Chemical chemical, int amount) {
+        if (chemical == null) {
             FMLLog.bigWarning("Null chemical supplied to chemicalstack. Did you try and create a stack for an unknown registered chemical?");
             throw new IllegalArgumentException("Cannot create a chemicalstack from a null chemical");
-        }
-        else if (!GameRegistry.findRegistry(Chemical.class).containsValue(chemical))
-        {
+        } else if (!GameRegistry.findRegistry(Chemical.class).containsValue(chemical)) {
             FMLLog.bigWarning("Failed to attempt to create a ChemicalStack for an unregistered Chemical {} (type {})",
                               chemical.getName(), chemical.getClass().getName());
             throw new IllegalArgumentException("Cannot create a chemicalstack from an unregistered chemical");
@@ -41,78 +36,64 @@ public class ChemicalStack
         this.amount = amount;
     }
 
-    public ChemicalStack(Chemical chemical, int amount, NBTTagCompound nbt)
-    {
+    public ChemicalStack(Chemical chemical, int amount, NBTTagCompound nbt) {
         this(chemical, amount);
 
-        if (nbt != null)
-        {
+        if (nbt != null) {
             tag = (NBTTagCompound) nbt.copy();
         }
     }
 
-    public ChemicalStack(ChemicalStack stack, int amount)
-    {
+    public ChemicalStack(ChemicalStack stack, int amount) {
         this(stack.getChemical(), amount, stack.tag);
     }
 
     @Nullable
-    public static ChemicalStack loadChemicalStackFromNBT(NBTTagCompound nbt)
-    {
-        if (nbt == null)
-        {
+    public static ChemicalStack loadChemicalStackFromNBT(NBTTagCompound nbt) {
+        if (nbt == null) {
             return null;
         }
-        if (!nbt.hasKey("ChemicalName", Constants.NBT.TAG_STRING))
-        {
+        if (!nbt.hasKey("ChemicalName", Constants.NBT.TAG_STRING)) {
             return null;
         }
         String chemicalName = nbt.getString("ChemicalName");
         ResourceLocation resourceLocation = new ResourceLocation(MercuLab.MOD_ID, chemicalName);
-        if (GameRegistry.findRegistry(Chemical.class).getValue(resourceLocation) == null)
-        {
+        if (GameRegistry.findRegistry(Chemical.class).getValue(resourceLocation) == null) {
             return null;
         }
         ChemicalStack stack = new ChemicalStack(GameRegistry.findRegistry(Chemical.class).getValue(resourceLocation), nbt.getInteger("Amount"));
-        if (nbt.hasKey("Tag"))
-        {
+        if (nbt.hasKey("Tag")) {
             stack.tag = nbt.getCompoundTag("Tag");
         }
         return stack;
     }
 
-    public NBTTagCompound writeToNBT(NBTTagCompound nbt)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
         nbt.setString("ChemicalName", getChemical().chemicalName);
         nbt.setInteger("Amount", amount);
 
-        if (this.tag != null)
-        {
+        if (this.tag != null) {
             nbt.setTag("Tag", this.tag);
         }
         return nbt;
     }
 
-    public Chemical getChemical()
-    {
+    public Chemical getChemical() {
         return chemicalDelegate.get();
     }
 
-    public String getLocalizedName()
-    {
+    public String getLocalizedName() {
         return this.getChemical().getLocalizedName(this);
     }
 
-    public String getUnlocalizedName()
-    {
+    public String getUnlocalizedName() {
         return this.getChemical().getUnlocalizedName(this);
     }
 
     /**
      * @return A copy of this ChemicalStack
      */
-    public ChemicalStack copy()
-    {
+    public ChemicalStack copy() {
         return new ChemicalStack(getChemical(), amount, tag);
     }
 
@@ -122,21 +103,18 @@ public class ChemicalStack
      * @param other The ChemicalStack for comparison.
      * @return true if the Chemicals (IDs and NBT Tags) are the same
      */
-    public boolean isChemicalEqual(@Nullable ChemicalStack other)
-    {
+    public boolean isChemicalEqual(@Nullable ChemicalStack other) {
         return other != null && getChemical() == other.getChemical() && isChemicalStackTagEqual(other);
     }
 
-    private boolean isChemicalStackTagEqual(ChemicalStack other)
-    {
+    private boolean isChemicalStackTagEqual(ChemicalStack other) {
         return tag == null ? other.tag == null : other.tag != null && tag.equals(other.tag);
     }
 
     /**
      * Determines if the NBT Tags are equal. Useful if the ChemicalIDs are known to be equal.
      */
-    public static boolean areChemicalStackTagsEqual(@Nullable ChemicalStack stack1, @Nullable ChemicalStack stack2)
-    {
+    public static boolean areChemicalStackTagsEqual(@Nullable ChemicalStack stack1, @Nullable ChemicalStack stack2) {
         return stack1 == null && stack2 == null || (stack1 != null && stack2 != null && stack1.isChemicalStackTagEqual(stack2));
     }
 
@@ -146,8 +124,7 @@ public class ChemicalStack
      * @param other The stack to compare
      * @return true of this ChemicalStack contains the other ChemicalStack (same chemical and >= amount)
      */
-    public boolean containsChemical(@Nullable ChemicalStack other)
-    {
+    public boolean containsChemical(@Nullable ChemicalStack other) {
         return isChemicalEqual(other) && amount >= (other != null ? other.amount : 0);
     }
 
@@ -157,8 +134,7 @@ public class ChemicalStack
      * @param other the ChemicalStack for comparison
      * @return true if the two ChemicalStacks are exactly the same
      */
-    public boolean isChemicalStackIdentical(ChemicalStack other)
-    {
+    public boolean isChemicalStackIdentical(ChemicalStack other) {
         return isChemicalEqual(other) && amount == other.amount;
     }
 
@@ -169,10 +145,8 @@ public class ChemicalStack
      * @param other The ItemStack for comparison
      * @return true if the Chemicals (IDs and NBT Tags) are the same
      */
-    public boolean isChemicalEqual(ItemStack other)
-    {
-        if (other == null)
-        {
+    public boolean isChemicalEqual(ItemStack other) {
+        if (other == null) {
             return false;
         }
 
@@ -180,13 +154,11 @@ public class ChemicalStack
     }
 
     @Override
-    public final int hashCode()
-    {
+    public final int hashCode() {
         int code = 1;
         code = 31*code + getChemical().hashCode();
         code = 31*code + amount;
-        if (tag != null)
-        {
+        if (tag != null) {
             code = 31*code + tag.hashCode();
         }
         return code;
@@ -198,10 +170,8 @@ public class ChemicalStack
      * This is included for use in data structures.
      */
     @Override
-    public boolean equals(Object obj)
-    {
-        if (!(obj instanceof ChemicalStack))
-        {
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ChemicalStack)) {
             return false;
         }
 

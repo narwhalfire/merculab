@@ -2,7 +2,6 @@ package net.scottnotfound.merculab.proxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
@@ -29,7 +28,7 @@ import java.io.File;
 
 
 @Mod.EventBusSubscriber
-public class CommonProxy {
+public class Proxy {
 
     public static Configuration config;
 
@@ -55,27 +54,14 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(MercuLabBlocks.testBlock);
-        event.getRegistry().register(MercuLabBlocks.testContainerBlock);
-        event.getRegistry().register(MercuLabBlocks.testBlockProcessAB);
-        event.getRegistry().register(MercuLabBlocks.bakedModelBlock);
-        event.getRegistry().register(MercuLabBlocks.Vial);
+        MercuLabBlocks.initBlocks();
+        MercuLabBlocks.registerBlocks();
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event) {
-        event.getRegistry().register(MercuLabItems.testItem);
-        event.getRegistry().register(MercuLabItems.testItemA);
-        event.getRegistry().register(MercuLabItems.testItemB);
-        event.getRegistry().register(MercuLabItems.Vial);
-        event.getRegistry().register(new ItemBlock(MercuLabBlocks.testBlock)
-                .setRegistryName(MercuLabBlocks.testBlock.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(MercuLabBlocks.testContainerBlock)
-                .setRegistryName(MercuLabBlocks.testContainerBlock.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(MercuLabBlocks.testBlockProcessAB)
-                .setRegistryName(MercuLabBlocks.testBlockProcessAB.getRegistryName()));
-        event.getRegistry().register(new ItemBlock(MercuLabBlocks.bakedModelBlock)
-                .setRegistryName(MercuLabBlocks.bakedModelBlock.getRegistryName()));
+        MercuLabItems.initItems();
+        MercuLabItems.registerItems();
     }
 
     public static void registerOthers() {
@@ -89,7 +75,8 @@ public class CommonProxy {
 
     @SubscribeEvent
     public static void registerChemicals(RegistryEvent.Register<Chemical> event) {
-        event.getRegistry().register(MercuLabChemicals.silicon_dioxide);
+        MercuLabChemicals.initChemicals();
+        MercuLabChemicals.registerChemicals();
     }
 
     @SubscribeEvent

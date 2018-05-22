@@ -13,8 +13,7 @@ import javax.annotation.Nullable;
 
 @Cancelable
 @Event.HasResult
-public class CollectChemicalEvent extends PlayerEvent
-{
+public class CollectChemicalEvent extends PlayerEvent {
 
     private final ItemStack current;
     private final World world;
@@ -23,8 +22,7 @@ public class CollectChemicalEvent extends PlayerEvent
 
     private ItemStack result;
 
-    public CollectChemicalEvent(EntityPlayer player, @Nonnull ItemStack current, World world, @Nullable RayTraceResult target)
-    {
+    public CollectChemicalEvent(EntityPlayer player, @Nonnull ItemStack current, World world, @Nullable RayTraceResult target) {
         super(player);
         this.current = current;
         this.world = world;
@@ -32,26 +30,21 @@ public class CollectChemicalEvent extends PlayerEvent
     }
 
     @Nonnull
-    public ItemStack getEmptyContainer()
-    {
+    public ItemStack getEmptyContainer() {
         return this.current;
     }
-    public World getWorld()
-    {
+    public World getWorld() {
         return this.world;
     }
     @Nullable
-    public RayTraceResult getTarget()
-    {
+    public RayTraceResult getTarget() {
         return this.target;
     }
     @Nonnull
-    public ItemStack getFilledContainer()
-    {
+    public ItemStack getFilledContainer() {
         return this.result;
     }
-    public void setFilledContainer(@Nonnull ItemStack container)
-    {
+    public void setFilledContainer(@Nonnull ItemStack container) {
         this.result = container;
     }
 

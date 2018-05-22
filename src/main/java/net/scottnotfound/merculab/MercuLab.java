@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.scottnotfound.merculab.proxy.CommonProxy;
+import net.scottnotfound.merculab.proxy.Proxy;
 
 @Mod(modid = MercuLab.MOD_ID, name = MercuLab.MOD_NAME, version = MercuLab.MOD_VERSION)
 public class MercuLab {
@@ -19,7 +19,7 @@ public class MercuLab {
 
     @SidedProxy(clientSide = "net.scottnotfound.merculab.proxy.ClientProxy",
             serverSide = "net.scottnotfound.merculab.proxy.ServerProxy")
-    public static CommonProxy proxy;
+    public static Proxy proxy;
 
     @Mod.Instance
     public static MercuLab instance;

@@ -7,24 +7,27 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.IInitializer;
 
-public class TestContainerBlock extends Block implements ITileEntityProvider {
+public class TestContainerBlock extends Block implements IInitializer, ITileEntityProvider {
+
+    public static ItemBlock itemBlock;
 
     public static final int GUI_ID = 1;
 
     public TestContainerBlock() {
         super(Material.ROCK);
-        setRegistryName("testcontainerblock");
-        setUnlocalizedName(MercuLab.MOD_ID + ".testcontainerblock");
     }
 
     @SideOnly(Side.CLIENT)
@@ -50,5 +53,17 @@ public class TestContainerBlock extends Block implements ITileEntityProvider {
         }
         player.openGui(MercuLab.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
+    }
+
+    @Override
+    public void init() {
+
+        this.setRegistryName("testcontainerblock");
+        ForgeRegistries.BLOCKS.register(this);
+
+        itemBlock = new ItemBlock(this);
+        itemBlock.setRegistryName(this.getRegistryName());
+        ForgeRegistries.ITEMS.register(itemBlock);
+
     }
 }

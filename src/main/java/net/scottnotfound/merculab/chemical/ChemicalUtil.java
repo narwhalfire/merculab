@@ -20,8 +20,7 @@ import net.scottnotfound.merculab.chemical.capability.IChemicalHandlerItem;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ChemicalUtil
-{
+public class ChemicalUtil {
     private ChemicalUtil() {}
 
     /**
@@ -41,8 +40,7 @@ public class ChemicalUtil
                                                       @Nonnull EnumHand hand,
                                                       @Nonnull World world,
                                                       @Nonnull BlockPos pos,
-                                                      @Nullable EnumFacing side)
-    {
+                                                      @Nullable EnumFacing side) {
         Preconditions.checkNotNull(world);
         Preconditions.checkNotNull(pos);
 
@@ -63,26 +61,21 @@ public class ChemicalUtil
      */
     public static boolean interactWithChemicalHandler(@Nonnull EntityPlayer player,
                                                       @Nonnull EnumHand hand,
-                                                      @Nonnull IChemicalHandler handler)
-    {
+                                                      @Nonnull IChemicalHandler handler) {
         Preconditions.checkNotNull(player);
         Preconditions.checkNotNull(hand);
         Preconditions.checkNotNull(handler);
 
         ItemStack heldItem = player.getHeldItem(hand);
-        if (!heldItem.isEmpty())
-        {
+        if (!heldItem.isEmpty()) {
             IItemHandler playerInventory = player.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            if (playerInventory != null)
-            {
+            if (playerInventory != null) {
                 ChemicalActionResult chemicalActionResult = tryInsertContainerAndStow(heldItem, handler, playerInventory, Integer.MAX_VALUE, player, true);
-                if (!chemicalActionResult.isSuccess())
-                {
+                if (!chemicalActionResult.isSuccess()) {
                     chemicalActionResult = tryEmptyContainerAndStow(heldItem, handler, playerInventory, Integer.MAX_VALUE, player, true);
                 }
 
-                if (chemicalActionResult.isSuccess())
-                {
+                if (chemicalActionResult.isSuccess()) {
                     player.setHeldItem(hand, chemicalActionResult.getResult());
                     return true;
                 }
@@ -108,25 +101,18 @@ public class ChemicalUtil
                                                           IChemicalHandler chemicalSource,
                                                           int maxAmount,
                                                           @Nullable EntityPlayer player,
-                                                          boolean doInsert)
-    {
+                                                          boolean doInsert) {
         ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(container, 1);
         IChemicalHandlerItem containerChemicalHandler = getChemicalHandler(containerCopy);
-        if (containerChemicalHandler != null)
-        {
+        if (containerChemicalHandler != null) {
             ChemicalStack simulatedTransfer = tryChemicalTransfer(containerChemicalHandler, chemicalSource, maxAmount, false);
-            if (simulatedTransfer != null)
-            {
-                if (doInsert)
-                {
+            if (simulatedTransfer != null) {
+                if (doInsert) {
                     tryChemicalTransfer(containerChemicalHandler, chemicalSource, maxAmount, true);
-                    if (player != null)
-                    {
+                    if (player != null) {
                         //todo: play a sound
                     }
-                }
-                else
-                {
+                } else {
                     containerChemicalHandler.insert(simulatedTransfer, true);
                 }
 
@@ -155,19 +141,14 @@ public class ChemicalUtil
                                                          IChemicalHandler chemicalDestination,
                                                          int maxAmount,
                                                          @Nullable EntityPlayer player,
-                                                         boolean doExtract)
-    {
+                                                         boolean doExtract) {
         ItemStack containerCopy = ItemHandlerHelper.copyStackWithSize(container, 1);
         IChemicalHandlerItem containerChemicalHandler = getChemicalHandler(containerCopy);
-        if (containerChemicalHandler != null)
-        {
-            if (doExtract)
-            {
+        if (containerChemicalHandler != null) {
+            if (doExtract) {
                 ChemicalStack transfer = tryChemicalTransfer(chemicalDestination, containerChemicalHandler, maxAmount, true);
-                if (transfer != null)
-                {
-                    if (player != null)
-                    {
+                if (transfer != null) {
+                    if (player != null) {
                         //todo: play a sound
                     }
                     ItemStack resultContainer = containerChemicalHandler.getContainer();
@@ -210,42 +191,30 @@ public class ChemicalUtil
                                                                  IItemHandler inventory,
                                                                  int maxAmount,
                                                                  @Nullable EntityPlayer player,
-                                                                 boolean doInsert)
-    {
-        if (container.isEmpty())
-        {
+                                                                 boolean doInsert) {
+        if (container.isEmpty()) {
             return ChemicalActionResult.FAILURE;
         }
 
-        if (player != null && player.capabilities.isCreativeMode)
-        {
+        if (player != null && player.capabilities.isCreativeMode) {
             ChemicalActionResult filledReal = tryInsertContainer(container, chemicalSource, maxAmount, player, doInsert);
-            if (filledReal.isSuccess())
-            {
+            if (filledReal.isSuccess()) {
                 return new ChemicalActionResult(container);
             }
-        }
-        else if (container.getCount() == 1)
-        {
+        } else if (container.getCount() == 1) {
             ChemicalActionResult filledReal = tryInsertContainer(container, chemicalSource, maxAmount, player, doInsert);
-            if (filledReal.isSuccess())
-            {
+            if (filledReal.isSuccess()) {
                 return filledReal;
             }
-        }
-        else
-        {
+        } else {
             ChemicalActionResult filledSimulated = tryInsertContainer(container, chemicalSource, maxAmount, player, false);
-            if(filledSimulated.isSuccess())
-            {
+            if(filledSimulated.isSuccess()) {
                 ItemStack remainder = ItemHandlerHelper.insertItemStacked(inventory, filledSimulated.getResult(), true);
-                if (remainder.isEmpty() || player != null)
-                {
+                if (remainder.isEmpty() || player != null) {
                     ChemicalActionResult filledReal = tryInsertContainer(container, chemicalSource, maxAmount, player, doInsert);
                     remainder = ItemHandlerHelper.insertItemStacked(inventory, filledReal.getResult(), !doInsert);
 
-                    if (!remainder.isEmpty() && player != null && doInsert)
-                    {
+                    if (!remainder.isEmpty() && player != null && doInsert) {
                         ItemHandlerHelper.giveItemToPlayer(player, remainder);
                     }
 
@@ -280,42 +249,30 @@ public class ChemicalUtil
                                                                 IItemHandler inventory,
                                                                 int maxAmount,
                                                                 @Nullable EntityPlayer player,
-                                                                boolean doExtract)
-    {
-        if (container.isEmpty())
-        {
+                                                                boolean doExtract) {
+        if (container.isEmpty()) {
             return ChemicalActionResult.FAILURE;
         }
 
-        if (player != null && player.capabilities.isCreativeMode)
-        {
+        if (player != null && player.capabilities.isCreativeMode) {
             ChemicalActionResult emptiedReal = tryEmptyContainer(container, chemicalDestination, maxAmount, player, doExtract);
-            if (emptiedReal.isSuccess())
-            {
+            if (emptiedReal.isSuccess()) {
                 return new ChemicalActionResult(container);
             }
-        }
-        else if (container.getCount() == 1)
-        {
+        } else if (container.getCount() == 1) {
             ChemicalActionResult emptiedReal = tryEmptyContainer(container, chemicalDestination, maxAmount, player, doExtract);
-            if (emptiedReal.isSuccess())
-            {
+            if (emptiedReal.isSuccess()) {
                 return emptiedReal;
             }
-        }
-        else
-        {
+        } else {
             ChemicalActionResult emptiedSimulated = tryEmptyContainer(container, chemicalDestination, maxAmount, player, false);
-            if (emptiedSimulated.isSuccess())
-            {
+            if (emptiedSimulated.isSuccess()) {
                 ItemStack remainder = ItemHandlerHelper.insertItemStacked(inventory, emptiedSimulated.getResult(), true);
-                if (remainder.isEmpty() || player != null)
-                {
+                if (remainder.isEmpty() || player != null) {
                     ChemicalActionResult emptiedReal = tryEmptyContainer(container, chemicalDestination, maxAmount, player, doExtract);
                     remainder = ItemHandlerHelper.insertItemStacked(inventory, emptiedReal.getResult(), !doExtract);
 
-                    if (!remainder.isEmpty() && player != null && doExtract)
-                    {
+                    if (!remainder.isEmpty() && player != null && doExtract) {
                         ItemHandlerHelper.giveItemToPlayer(player, remainder);
                     }
 
@@ -340,11 +297,9 @@ public class ChemicalUtil
      * @return the chemicalStack that was transferred from the source to the destination. null on failure.
      */
     @Nullable
-    public static ChemicalStack tryChemicalTransfer(IChemicalHandler chemicalDestination, IChemicalHandler chemicalSource, int maxAmount, boolean doTransfer)
-    {
+    public static ChemicalStack tryChemicalTransfer(IChemicalHandler chemicalDestination, IChemicalHandler chemicalSource, int maxAmount, boolean doTransfer) {
         ChemicalStack extractable = chemicalSource.extract(maxAmount, false);
-        if (extractable != null && extractable.amount > 0)
-        {
+        if (extractable != null && extractable.amount > 0) {
             return tryChemicalTransfer_Internal(chemicalDestination, chemicalSource, extractable, doTransfer);
         }
         return null;
@@ -362,11 +317,9 @@ public class ChemicalUtil
      * @return the chemicalStack that was transferred from the source to the destination. null on failure.
      */
     @Nullable
-    public static ChemicalStack tryChemicalTransfer(IChemicalHandler chemicalDestination, IChemicalHandler chemicalSource, ChemicalStack resource, boolean doTransfer)
-    {
+    public static ChemicalStack tryChemicalTransfer(IChemicalHandler chemicalDestination, IChemicalHandler chemicalSource, ChemicalStack resource, boolean doTransfer) {
         ChemicalStack extractable = chemicalSource.extract(resource, false);
-        if (extractable != null && extractable.amount > 0 && resource.isChemicalEqual(extractable))
-        {
+        if (extractable != null && extractable.amount > 0 && resource.isChemicalEqual(extractable)) {
             return tryChemicalTransfer_Internal(chemicalDestination, chemicalSource, extractable, doTransfer);
         }
         return null;
@@ -377,21 +330,15 @@ public class ChemicalUtil
      * Assumes that "extractable" can be extracted from "chemicalSource".
      */
     @Nullable
-    private static ChemicalStack tryChemicalTransfer_Internal(IChemicalHandler chemicalDestination, IChemicalHandler chemicalSource, ChemicalStack extractable, boolean doTransfer)
-    {
+    private static ChemicalStack tryChemicalTransfer_Internal(IChemicalHandler chemicalDestination, IChemicalHandler chemicalSource, ChemicalStack extractable, boolean doTransfer) {
         int fillableAmount = chemicalDestination.insert(extractable, false);
-        if (fillableAmount > 0)
-        {
-            if (doTransfer)
-            {
+        if (fillableAmount > 0) {
+            if (doTransfer) {
                 ChemicalStack extracted = chemicalSource.extract(fillableAmount, true);
-                if (extracted != null)
-                {
+                if (extracted != null) {
                     extracted.amount = chemicalDestination.insert(extracted, true);
                 }
-            }
-            else
-            {
+            } else {
                 extractable.amount = fillableAmount;
                 return extractable;
             }
@@ -403,8 +350,7 @@ public class ChemicalUtil
      * Helper method to get an {@link IChemicalHandlerItem} for an itemStack.
      */
     @Nullable
-    public static IChemicalHandlerItem getChemicalHandler(@Nonnull ItemStack itemStack)
-    {
+    public static IChemicalHandlerItem getChemicalHandler(@Nonnull ItemStack itemStack) {
         return itemStack.hasCapability(CapabilityChemicalHandler.CHEMICAL_HANDLER_ITEM_CAPABILITY, null) ?
                itemStack.getCapability(CapabilityChemicalHandler.CHEMICAL_HANDLER_ITEM_CAPABILITY, null) :
                null;
@@ -414,14 +360,11 @@ public class ChemicalUtil
      * Helper method to get the chemical contained in an itemStack
      */
     @Nullable
-    public static ChemicalStack getChemicalContained(@Nonnull ItemStack container)
-    {
-        if (container.isEmpty())
-        {
+    public static ChemicalStack getChemicalContained(@Nonnull ItemStack container) {
+        if (container.isEmpty()) {
             container = ItemHandlerHelper.copyStackWithSize(container, 1);
             IChemicalHandlerItem chemicalHandler = getChemicalHandler(container);
-            if (chemicalHandler != null)
-            {
+            if (chemicalHandler != null) {
                 return chemicalHandler.extract(Integer.MAX_VALUE, false);
             }
         }
@@ -432,16 +375,13 @@ public class ChemicalUtil
      * Helper method to get an {@link IChemicalHandler} for a block position.
      */
     @Nullable
-    public static IChemicalHandler getChemicalHandler(World world, BlockPos blockPos, @Nullable EnumFacing side)
-    {
+    public static IChemicalHandler getChemicalHandler(World world, BlockPos blockPos, @Nullable EnumFacing side) {
         IBlockState state = world.getBlockState(blockPos);
         Block block = state.getBlock();
 
-        if (block.hasTileEntity(state))
-        {
+        if (block.hasTileEntity(state)) {
             TileEntity tileEntity = world.getTileEntity(blockPos);
-            if (tileEntity != null && tileEntity.hasCapability(CapabilityChemicalHandler.CHEMICAL_HANDLER_CAPABILITY, side))
-            {
+            if (tileEntity != null && tileEntity.hasCapability(CapabilityChemicalHandler.CHEMICAL_HANDLER_CAPABILITY, side)) {
                 return tileEntity.getCapability(CapabilityChemicalHandler.CHEMICAL_HANDLER_CAPABILITY, side);
             }
         }

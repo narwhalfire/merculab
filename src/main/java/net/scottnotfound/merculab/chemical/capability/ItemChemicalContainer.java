@@ -12,21 +12,18 @@ import javax.annotation.Nullable;
 /**
  * A simple chemical container.
  */
-public class ItemChemicalContainer extends Item
-{
+public class ItemChemicalContainer extends Item {
     protected final int capacity;
 
     /**
      * @param capacity Maximum capacity of the chemical container.
      */
-    public ItemChemicalContainer(int capacity)
-    {
+    public ItemChemicalContainer(int capacity) {
         this.capacity = capacity;
     }
 
     @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new ChemicalHandlerItemStack(stack, capacity);
     }
 }

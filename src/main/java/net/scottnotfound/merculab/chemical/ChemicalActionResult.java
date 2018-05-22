@@ -13,33 +13,28 @@ import javax.annotation.Nonnull;
  * Successful actions may have an empty ItemStack result in some cases,
  * for example the action succeeded and the resulting item was consumed.
  */
-public class ChemicalActionResult
-{
+public class ChemicalActionResult {
     public static final ChemicalActionResult FAILURE = new ChemicalActionResult(false, ItemStack.EMPTY);
 
     public final boolean success;
     @Nonnull
     public final ItemStack result;
 
-    public ChemicalActionResult(@Nonnull ItemStack result)
-    {
+    public ChemicalActionResult(@Nonnull ItemStack result) {
         this(true, result);
     }
 
-    private ChemicalActionResult(boolean success, @Nonnull ItemStack result)
-    {
+    private ChemicalActionResult(boolean success, @Nonnull ItemStack result) {
         this.success = success;
         this.result = result;
     }
 
-    public boolean isSuccess()
-    {
+    public boolean isSuccess() {
         return success;
     }
 
     @Nonnull
-    public ItemStack getResult()
-    {
+    public ItemStack getResult() {
         return result;
     }
 }

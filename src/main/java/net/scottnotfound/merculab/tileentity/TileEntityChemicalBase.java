@@ -1,4 +1,5 @@
 package net.scottnotfound.merculab.tileentity;
 
-public abstract class TileEntityChemistryBase {
+public abstract class TileEntityChemicalBase
+{
 }

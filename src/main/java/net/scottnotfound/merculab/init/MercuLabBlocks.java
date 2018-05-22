@@ -1,6 +1,5 @@
 package net.scottnotfound.merculab.init;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.block.TestBlockProcessAB;
@@ -9,23 +8,58 @@ import net.scottnotfound.merculab.block.glassware.BlockVial;
 import net.scottnotfound.merculab.test.TestBlock;
 import net.scottnotfound.merculab.test.TestContainerBlock;
 
+import java.util.ArrayList;
+
 public class MercuLabBlocks {
 
-    @GameRegistry.ObjectHolder("merculab:test_block")
-    public static TestBlock testBlock = new TestBlock();
+    private static ArrayList<IInitializer> initList = new ArrayList<>();
 
-    @GameRegistry.ObjectHolder("merculab:testcontainerblock")
-    public static TestContainerBlock testContainerBlock = new TestContainerBlock();
+    public static TestBlock testBlock;
+    public static TestContainerBlock testContainerBlock;
+    public static TestBlockProcessAB testBlockProcessAB;
+    public static TestBlockbakedmodel bakedModelBlock;
 
-    @GameRegistry.ObjectHolder("merculab:processab")
-    public static TestBlockProcessAB testBlockProcessAB = new TestBlockProcessAB();
+    public static BlockVial vial;
 
-    @GameRegistry.ObjectHolder("merculab:bakedmodelblock")
-    public static TestBlockbakedmodel bakedModelBlock = new TestBlockbakedmodel();
 
-    @GameRegistry.ObjectHolder("merculab:vial")
-    public static BlockVial Vial = new BlockVial(1000);
+    private static void preInitBlocks() {
 
+        testBlock = new TestBlock();
+        testContainerBlock = new TestContainerBlock();
+        testBlockProcessAB = new TestBlockProcessAB();
+        bakedModelBlock = new TestBlockbakedmodel();
+
+        vial = new BlockVial(1000);
+
+    }
+
+    private static void preInitList() {
+
+        initList.add(testBlock);
+        initList.add(testContainerBlock);
+        initList.add(testBlockProcessAB);
+        initList.add(bakedModelBlock);
+
+        initList.add(vial);
+
+    }
+
+    public static void initBlocks() {
+
+        preInitBlocks();
+        preInitList();
+
+        for (IInitializer init : initList) {
+            init.init();
+        }
+
+    }
+
+    public static void registerBlocks() {
+
+
+
+    }
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {

@@ -7,8 +7,7 @@ import javax.annotation.Nullable;
 /**
  * Very similar to Forge's {@link net.minecraftforge.fluids.capability.IFluidTankProperties}.
  */
-public interface IChemicalContainerProperties
-{
+public interface IChemicalContainerProperties {
     /**
      * @return A copy of the chemical contents of this container. May be null.
      * To modify the contents, use {@link IChemicalHandler}

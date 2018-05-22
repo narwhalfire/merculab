@@ -9,38 +9,32 @@ import net.scottnotfound.merculab.chemical.ChemicalContainer;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class TileChemicalHandler extends TileEntity
-{
+public class TileChemicalHandler extends TileEntity {
     protected ChemicalContainer container = new ChemicalContainer(0);
 
     @Override
-    public void readFromNBT(NBTTagCompound tag)
-    {
+    public void readFromNBT(NBTTagCompound tag) {
         super.readFromNBT(tag);
         container.readFromNBT(tag);
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound tag)
-    {
+    public NBTTagCompound writeToNBT(NBTTagCompound tag) {
         tag = super.writeToNBT(tag);
         container.writeToNBT(tag);
         return tag;
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityChemicalHandler.CHEMICAL_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     @Nullable
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-    {
-        if (capability == CapabilityChemicalHandler.CHEMICAL_HANDLER_CAPABILITY)
-        {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityChemicalHandler.CHEMICAL_HANDLER_CAPABILITY) {
             return (T) container;
         }
         return super.getCapability(capability, facing);

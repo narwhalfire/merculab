@@ -5,50 +5,42 @@ import net.scottnotfound.merculab.chemical.ChemicalStack;
 
 import javax.annotation.Nullable;
 
-public class ChemicalContainerPropertiesWrapper implements IChemicalContainerProperties
-{
+public class ChemicalContainerPropertiesWrapper implements IChemicalContainerProperties {
     protected final ChemicalContainer container;
 
-    public ChemicalContainerPropertiesWrapper(ChemicalContainer container)
-    {
+    public ChemicalContainerPropertiesWrapper(ChemicalContainer container) {
         this.container = container;
     }
 
     @Nullable
     @Override
-    public ChemicalStack getContents()
-    {
+    public ChemicalStack getContents() {
         ChemicalStack contents = container.getChemical();
         return contents == null ? null : contents.copy();
     }
 
     @Override
-    public int getCapacity()
-    {
+    public int getCapacity() {
         return container.getCapacity();
     }
 
     @Override
-    public boolean canInsert()
-    {
+    public boolean canInsert() {
         return container.canInsert();
     }
 
     @Override
-    public boolean canExtract()
-    {
+    public boolean canExtract() {
         return container.canExtract();
     }
 
     @Override
-    public boolean canInsertChemicalType(ChemicalStack chemicalStack)
-    {
+    public boolean canInsertChemicalType(ChemicalStack chemicalStack) {
         return container.canInsertChemicalType(chemicalStack);
     }
 
     @Override
-    public boolean canExtractChemicalType(ChemicalStack chemicalStack)
-    {
+    public boolean canExtractChemicalType(ChemicalStack chemicalStack) {
         return container.canExtractChemicalType(chemicalStack);
     }
 

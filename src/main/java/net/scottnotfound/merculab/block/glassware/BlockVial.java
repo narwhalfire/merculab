@@ -13,38 +13,35 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.scottnotfound.merculab.chemical.capability.TileChemicalHandler;
+import net.scottnotfound.merculab.init.IInitializer;
 import net.scottnotfound.merculab.init.MercuLabItems;
 
 import java.util.Random;
 
-public class BlockVial extends Block implements ITileEntityProvider
-{
+public class BlockVial extends Block implements IInitializer, ITileEntityProvider {
 
     private final int capacity;
 
-    public BlockVial(int capacity)
-    {
+    public BlockVial(int capacity) {
         super(Material.GLASS);
         this.capacity = capacity;
-        this.setRegistryName("merculab:vial_block");
     }
 
     /**
      * Get the Item that this Block should drop when harvested.
      */
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
-        return MercuLabItems.Vial;
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return MercuLabItems.vial;
     }
 
     /**
      * Checks if this block can be placed exactly at the given position.
      */
     @Override
-    public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
-    {
+    public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
         //todo: implement this
         return true;
     }
@@ -54,8 +51,7 @@ public class BlockVial extends Block implements ITileEntityProvider
      */
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
-                                    EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-    {
+                                    EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         //todo: empty contents on shift click
         return true;
     }
@@ -65,14 +61,12 @@ public class BlockVial extends Block implements ITileEntityProvider
      * Block.removedByPlayer
      */
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity, ItemStack itemStack)
-    {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity, ItemStack itemStack) {
         ItemStack newStack = new ItemStack(getItemDropped(state, new Random(), 0));
 
         NBTTagCompound tileEntityTag = new NBTTagCompound();
 
-        if (tileEntity != null)
-        {
+        if (tileEntity != null) {
             tileEntityTag = tileEntity.writeToNBT(tileEntityTag);
         }
 
@@ -88,8 +82,15 @@ public class BlockVial extends Block implements ITileEntityProvider
 
 
     @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta)
-    {
+    public TileEntity createNewTileEntity(World worldIn, int meta) {
         return new TileChemicalHandler();
+    }
+
+    @Override
+    public void init() {
+
+        this.setRegistryName("vial");
+        ForgeRegistries.BLOCKS.register(this);
+
     }
 }

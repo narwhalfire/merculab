@@ -8,7 +8,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.SERVER)
 @Mod.EventBusSubscriber(Side.SERVER)
-public class ServerProxy extends CommonProxy {
+public class ServerProxy extends Proxy
+{
 
     @Override
     public void serverLoad(FMLServerStartingEvent event) {

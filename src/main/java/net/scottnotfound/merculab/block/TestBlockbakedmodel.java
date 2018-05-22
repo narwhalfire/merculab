@@ -9,7 +9,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -17,14 +17,17 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.MercuLab;
 import net.scottnotfound.merculab.block.property.UnlistedPropertyBlockAvailable;
 import net.scottnotfound.merculab.client.render.block.model.TestBakedModel;
+import net.scottnotfound.merculab.init.IInitializer;
 import net.scottnotfound.merculab.init.MercuLabBlocks;
 
-public class TestBlockbakedmodel extends Block {
+public class TestBlockbakedmodel extends Block implements IInitializer {
+
+    public static ItemBlock itemBlock;
 
     public static final UnlistedPropertyBlockAvailable NORTH = new
             UnlistedPropertyBlockAvailable("north");
@@ -41,8 +44,6 @@ public class TestBlockbakedmodel extends Block {
 
     public TestBlockbakedmodel() {
         super(Material.ROCK);
-        setUnlocalizedName(MercuLab.MOD_ID + ".bakedmodelblock");
-        setRegistryName("bakedmodelblock");
     }
 
     @SideOnly(Side.CLIENT)
@@ -58,7 +59,7 @@ public class TestBlockbakedmodel extends Block {
 
     @SideOnly(Side.CLIENT)
     public void initItemModel() {
-        Item itemBlock = Item.REGISTRY.getObject(new ResourceLocation(MercuLab.MOD_ID, "bakedmodelblock"));
+        Item itemBlock = Item.REGISTRY.getObject(this.getRegistryName());
         ModelResourceLocation itemModelResourceLocation = new ModelResourceLocation(getRegistryName(), "inventory");
         final int DEFAULT_ITEM_SUBTYPE = 0;
         Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(itemBlock, DEFAULT_ITEM_SUBTYPE, itemModelResourceLocation);
@@ -132,4 +133,15 @@ public class TestBlockbakedmodel extends Block {
         return world.getBlockState(pos).getBlock() == MercuLabBlocks.bakedModelBlock;
     }
 
+    @Override
+    public void init() {
+
+        this.setRegistryName("bakedmodelblock");
+        ForgeRegistries.BLOCKS.register(this);
+
+        itemBlock = new ItemBlock(this);
+        itemBlock.setRegistryName(this.getRegistryName());
+        ForgeRegistries.ITEMS.register(itemBlock);
+
+    }
 }

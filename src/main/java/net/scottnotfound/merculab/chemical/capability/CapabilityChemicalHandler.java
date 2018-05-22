@@ -21,47 +21,44 @@ public class CapabilityChemicalHandler
     @CapabilityInject(IChemicalHandlerItem.class)
     public static Capability<IChemicalHandlerItem> CHEMICAL_HANDLER_ITEM_CAPABILITY = null;
 
-    public static void register()
-    {
+    public static void register() {
         CapabilityManager.INSTANCE.register(IChemicalHandler.class,
                                             new DefaultChemicalHandlerStorage<>(),
                                             () -> new ChemicalContainer(0));
         CapabilityManager.INSTANCE.register(IChemicalHandlerItem.class,
                                             new DefaultChemicalHandlerStorage<>(),
-                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabItems.Vial), 0));
+                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabItems.vial), 0));
     }
 
-    private static class DefaultChemicalHandlerStorage<T extends IChemicalHandler> implements Capability.IStorage<T>
-    {
+    private static class DefaultChemicalHandlerStorage<T extends IChemicalHandler> implements Capability.IStorage<T> {
         @Override
-        public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side)
-        {
-            if (!(instance instanceof IChemicalContainer))
-            {
+        public NBTBase writeNBT(Capability<T> capability, T instance, EnumFacing side) {
+
+            if (!(instance instanceof IChemicalContainer)) {
                 throw new RuntimeException("IChemicalHandler instance does not implement IChemicalContainer");
             }
+
             NBTTagCompound nbt = new NBTTagCompound();
             IChemicalContainer container = (IChemicalContainer) instance;
             ChemicalStack chemicalStack = container.getChemical();
-            if (chemicalStack != null)
-            {
+
+            if (chemicalStack != null) {
                 chemicalStack.writeToNBT(nbt);
-            }
-            else
-            {
+            } else {
                 nbt.setString("Empty", "");
             }
+
             nbt.setInteger("Capacity", container.getCapacity());
             return nbt;
         }
 
         @Override
-        public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt)
-        {
-            if (!(instance instanceof ChemicalContainer))
-            {
+        public void readNBT(Capability<T> capability, T instance, EnumFacing side, NBTBase nbt) {
+
+            if (!(instance instanceof ChemicalContainer)) {
                 throw new RuntimeException("IChemicalHandler instance is not instance of ChemicalContainer");
             }
+
             NBTTagCompound tags = (NBTTagCompound) nbt;
             ChemicalContainer container = (ChemicalContainer) instance;
             container.setCapacity(tags.getInteger("Capacity"));

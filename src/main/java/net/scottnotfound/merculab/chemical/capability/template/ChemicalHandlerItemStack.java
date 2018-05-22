@@ -13,8 +13,7 @@ import net.scottnotfound.merculab.chemical.capability.IChemicalHandlerItem;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabilityProvider
-{
+public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabilityProvider {
     public static final String CHEMICAL_NBT_KEY = "Chemical";
 
     @Nonnull
@@ -25,27 +24,22 @@ public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabili
      * @param container The container itemStack, data is stored on it directly as NBT.
      * @param capacity The maximum capacity of this chemical container.
      */
-    public ChemicalHandlerItemStack(@Nonnull ItemStack container, int capacity)
-    {
+    public ChemicalHandlerItemStack(@Nonnull ItemStack container, int capacity) {
         this.container = container;
         this.capacity = capacity;
     }
 
     @Nullable
-    public ChemicalStack getChemical()
-    {
+    public ChemicalStack getChemical() {
         NBTTagCompound tagCompound = container.getTagCompound();
-        if (tagCompound == null || !tagCompound.hasKey(CHEMICAL_NBT_KEY))
-        {
+        if (tagCompound == null || !tagCompound.hasKey(CHEMICAL_NBT_KEY)) {
             return null;
         }
         return ChemicalStack.loadChemicalStackFromNBT(tagCompound.getCompoundTag(CHEMICAL_NBT_KEY));
     }
 
-    protected void setChemical(ChemicalStack chemical)
-    {
-        if (!container.hasTagCompound())
-        {
+    protected void setChemical(ChemicalStack chemical) {
+        if (!container.hasTagCompound()) {
             container.setTagCompound(new NBTTagCompound());
         }
 
@@ -55,62 +49,50 @@ public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabili
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing)
-    {
+    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityChemicalHandler.CHEMICAL_HANDLER_ITEM_CAPABILITY;
     }
 
     @SuppressWarnings("unchecked")
     @Nullable
     @Override
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing)
-    {
+    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityChemicalHandler.CHEMICAL_HANDLER_ITEM_CAPABILITY ? (T) this : null;
     }
 
     @Nonnull
     @Override
-    public ItemStack getContainer()
-    {
+    public ItemStack getContainer() {
         return container;
     }
 
     @Override
-    public IChemicalContainerProperties[] getContainerProperties()
-    {
+    public IChemicalContainerProperties[] getContainerProperties() {
         return new IChemicalContainerProperties[0];
     }
 
     @Override
-    public int insert(ChemicalStack resource, boolean doInsert)
-    {
-        if (container.getCount() != 1 || resource == null || resource.amount <= 0 || !canInsertChemicalType(resource))
-        {
+    public int insert(ChemicalStack resource, boolean doInsert) {
+        if (container.getCount() != 1 || resource == null || resource.amount <= 0 || !canInsertChemicalType(resource)) {
             return 0;
         }
 
         ChemicalStack contained = getChemical();
-        if (contained == null)
-        {
+        if (contained == null) {
             int insertAmount = Math.min(capacity, resource.amount);
 
-            if (doInsert)
-            {
+            if (doInsert) {
                 ChemicalStack inserted = resource.copy();
                 inserted.amount = insertAmount;
                 setChemical(inserted);
             }
 
             return insertAmount;
-        }
-        else
-        {
-            if (contained.isChemicalEqual(resource))
-            {
+        } else {
+            if (contained.isChemicalEqual(resource)) {
                 int insertAmount = Math.min(capacity - contained.amount, resource.amount);
 
-                if (doInsert && insertAmount > 0)
-                {
+                if (doInsert && insertAmount > 0) {
                     contained.amount += insertAmount;
                     setChemical(contained);
                 }
@@ -124,10 +106,8 @@ public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabili
 
     @Nullable
     @Override
-    public ChemicalStack extract(ChemicalStack resource, boolean doExtract)
-    {
-        if (container.getCount() != 1 || resource == null || resource.amount <= 0 || !resource.isChemicalEqual(getChemical()))
-        {
+    public ChemicalStack extract(ChemicalStack resource, boolean doExtract) {
+        if (container.getCount() != 1 || resource == null || resource.amount <= 0 || !resource.isChemicalEqual(getChemical())) {
             return null;
         }
         return extract(resource.amount, doExtract);
@@ -135,16 +115,13 @@ public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabili
 
     @Nullable
     @Override
-    public ChemicalStack extract(int maxExtract, boolean doExtract)
-    {
-        if (container.getCount() != 1 || maxExtract <= 0)
-        {
+    public ChemicalStack extract(int maxExtract, boolean doExtract) {
+        if (container.getCount() != 1 || maxExtract <= 0) {
             return null;
         }
 
         ChemicalStack contained = getChemical();
-        if (contained == null || contained.amount <= 0 || !canExtractChemicalType(contained))
-        {
+        if (contained == null || contained.amount <= 0 || !canExtractChemicalType(contained)) {
             return null;
         }
 
@@ -153,15 +130,11 @@ public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabili
         ChemicalStack extracted = contained.copy();
         extracted.amount = extractAmount;
 
-        if (doExtract)
-        {
+        if (doExtract) {
             contained.amount -= extractAmount;
-            if (contained.amount == 0)
-            {
+            if (contained.amount == 0) {
                 setContainerToEmpty();
-            }
-            else
-            {
+            } else {
                 setChemical(contained);
             }
         }
@@ -169,52 +142,42 @@ public class ChemicalHandlerItemStack implements IChemicalHandlerItem, ICapabili
         return extracted;
     }
 
-    public boolean canInsertChemicalType(ChemicalStack chemical)
-    {
+    public boolean canInsertChemicalType(ChemicalStack chemical) {
         return true;
     }
 
-    public boolean canExtractChemicalType(ChemicalStack chemical)
-    {
+    public boolean canExtractChemicalType(ChemicalStack chemical) {
         return true;
     }
 
-    protected void setContainerToEmpty()
-    {
-        if (container.getTagCompound() != null)
-        {
+    protected void setContainerToEmpty() {
+        if (container.getTagCompound() != null) {
             container.getTagCompound().removeTag(CHEMICAL_NBT_KEY);
         }
     }
 
-    public static class Consumable extends ChemicalHandlerItemStack
-    {
-        public Consumable(ItemStack container, int capacity)
-        {
+    public static class Consumable extends ChemicalHandlerItemStack {
+        public Consumable(ItemStack container, int capacity) {
             super(container, capacity);
         }
 
         @Override
-        protected void setContainerToEmpty()
-        {
+        protected void setContainerToEmpty() {
             super.setContainerToEmpty();
             container.shrink(1);
         }
     }
 
-    public static class SwapEmpty extends ChemicalHandlerItemStack
-    {
+    public static class SwapEmpty extends ChemicalHandlerItemStack {
         protected final ItemStack emptyContainer;
 
-        public SwapEmpty(ItemStack container, ItemStack emptyContainer, int capacity)
-        {
+        public SwapEmpty(ItemStack container, ItemStack emptyContainer, int capacity) {
             super(container, capacity);
             this.emptyContainer = emptyContainer;
         }
 
         @Override
-        protected void setContainerToEmpty()
-        {
+        protected void setContainerToEmpty() {
             super.setContainerToEmpty();
             container = emptyContainer;
         }

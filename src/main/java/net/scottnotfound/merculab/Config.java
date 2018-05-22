@@ -3,7 +3,7 @@ package net.scottnotfound.merculab;
 
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
-import net.scottnotfound.merculab.proxy.CommonProxy;
+import net.scottnotfound.merculab.proxy.Proxy;
 
 public class Config {
 
@@ -11,7 +11,7 @@ public class Config {
 
 
     public static void readConfig() {
-        Configuration cfg = CommonProxy.config;
+        Configuration cfg = Proxy.config;
         try {
             cfg.load();
             initGeneralConfig(cfg);

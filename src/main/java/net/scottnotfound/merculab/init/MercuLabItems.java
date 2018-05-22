@@ -4,25 +4,22 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.item.glassware.ItemVial;
 import net.scottnotfound.merculab.test.TestItem;
 
+import java.util.ArrayList;
+
 public class MercuLabItems {
 
-    @GameRegistry.ObjectHolder("merculab:test_item")
-    public static TestItem testItem = TestItem.t;
+    private static ArrayList<IInitializer> initList = new ArrayList<>();
 
-    @GameRegistry.ObjectHolder("merculab:testA")
-    public static TestItem testItemA = TestItem.a;
+    public static TestItem testItem;
+    public static TestItem testItemA;
+    public static TestItem testItemB;
 
-    @GameRegistry.ObjectHolder("merculab:testB")
-    public static TestItem testItemB = TestItem.b;
-
-    @GameRegistry.ObjectHolder("merculab:vial")
-    public static ItemVial Vial = new ItemVial(Fluid.BUCKET_VOLUME);
+    public static ItemVial vial;
 
     public static final CreativeTabs CHEM = new CreativeTabs("chem") {
         @Override
@@ -30,6 +27,44 @@ public class MercuLabItems {
             return new ItemStack(Items.SUGAR);
         }
     };
+
+
+    private static void preInitItems() {
+
+        testItem = TestItem.t;
+        testItemA = TestItem.a;
+        testItemB = TestItem.b;
+
+        vial = new ItemVial(Fluid.BUCKET_VOLUME);
+
+    }
+
+    private static void preInitList() {
+
+        initList.add(testItem);
+        initList.add(testItemA);
+        initList.add(testItemB);
+
+        initList.add(vial);
+
+    }
+
+    public static void initItems() {
+
+        preInitItems();
+        preInitList();
+
+        for (IInitializer init : initList) {
+            init.init();
+        }
+
+    }
+
+    public static void registerItems() {
+
+
+
+    }
 
     @SideOnly(Side.CLIENT)
     public static void initModels() {

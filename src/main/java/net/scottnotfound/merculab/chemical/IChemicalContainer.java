@@ -7,8 +7,7 @@ import javax.annotation.Nullable;
  *
  * A reference implementation can be found at {@link ChemicalContainer}
  */
-public interface IChemicalContainer
-{
+public interface IChemicalContainer {
     /**
      * @return ChemicalStack representing the chemical in the container, null if the container is empty.
      */

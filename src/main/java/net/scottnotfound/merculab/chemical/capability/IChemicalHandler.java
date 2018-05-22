@@ -9,8 +9,7 @@ import javax.annotation.Nullable;
  * Implement this interface as a capability which should handle chemicals, generally storing them
  * in one or more internal {@link IChemicalContainer} objects.
  */
-public interface IChemicalHandler
-{
+public interface IChemicalHandler {
     /**
      * Returns an array of objects which represent the internal containers.
      * These objects cannot be used to manipulate the internal containers.

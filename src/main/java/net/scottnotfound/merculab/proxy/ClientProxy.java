@@ -14,7 +14,8 @@ import net.scottnotfound.merculab.init.MercuLabItems;
 
 @SideOnly(Side.CLIENT)
 @Mod.EventBusSubscriber(Side.CLIENT)
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends Proxy
+{
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {

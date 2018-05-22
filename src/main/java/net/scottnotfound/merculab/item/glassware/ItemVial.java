@@ -15,7 +15,9 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.scottnotfound.merculab.chemical.capability.template.ChemicalHandlerItemStack;
+import net.scottnotfound.merculab.init.IInitializer;
 import net.scottnotfound.merculab.init.MercuLabBlocks;
 import net.scottnotfound.merculab.init.MercuLabItems;
 
@@ -23,19 +25,17 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 /**
- *  The Vial is used to store fluid or solid material (or maybe even gaseous).
+ *  The vial is used to store fluid or solid material (or maybe even gaseous).
  *  Used as temporary storage.
  */
-public class ItemVial extends ItemBlock
+public class ItemVial extends ItemBlock implements IInitializer
 {
 
     private final int capacity;
 
-    public ItemVial(int capacity)
-    {
-        super(MercuLabBlocks.Vial);
+    public ItemVial(int capacity) {
+        super(MercuLabBlocks.vial);
         this.capacity = capacity;
-        this.setRegistryName("vial");
         this.setCreativeTab(MercuLabItems.CHEM);
     }
 
@@ -44,28 +44,25 @@ public class ItemVial extends ItemBlock
      */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
-                                      float hitX, float hitY, float hitZ)
-    {
+                                      float hitX, float hitY, float hitZ) {
         IBlockState iBlockState = worldIn.getBlockState(pos);
         Block block = iBlockState.getBlock();
 
         //todo: check for special blocks that may handle this item differently and handle the behavior in that block's methods
 
-        if (!block.isReplaceable(worldIn, pos))
-        {
+        if (!block.isReplaceable(worldIn, pos)) {
             pos = pos.offset(facing);
         }
 
         ItemStack itemStack = player.getHeldItem(hand);
 
         if (!itemStack.isEmpty() && player.canPlayerEdit(pos, facing, itemStack)
-            && worldIn.mayPlace(this.block, pos, false, facing, (Entity) null))
-        {
+            && worldIn.mayPlace(this.block, pos, false, facing, (Entity) null)) {
+
             int i = this.getMetadata(itemStack.getMetadata());
             IBlockState newState = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
 
-            if (placeBlockAt(itemStack, player, worldIn, pos, facing, hitX, hitY, hitZ, newState))
-            {
+            if (placeBlockAt(itemStack, player, worldIn, pos, facing, hitX, hitY, hitZ, newState)) {
                 newState = worldIn.getBlockState(pos);
                 SoundType soundType = newState.getBlock().getSoundType(newState, worldIn, pos, player);
                 worldIn.playSound(player, pos, soundType.getPlaceSound(), SoundCategory.BLOCKS,
@@ -74,9 +71,8 @@ public class ItemVial extends ItemBlock
             }
 
             return EnumActionResult.SUCCESS;
-        }
-        else
-        {
+
+        } else {
             return EnumActionResult.FAIL;
         }
 
@@ -84,9 +80,15 @@ public class ItemVial extends ItemBlock
 
 
     @Override
-    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt)
-    {
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new ChemicalHandlerItemStack(stack, capacity);
     }
 
+    @Override
+    public void init() {
+
+        this.setRegistryName("vial");
+        ForgeRegistries.ITEMS.register(this);
+
+    }
 }
