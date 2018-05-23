@@ -42,7 +42,7 @@ public class BlockChemicalGlassware extends BlockChemicalBase {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return GameRegistry.findRegistry(Item.class).getValue(new ResourceLocation(MercuLab.MOD_ID, name));
+        return ForgeRegistries.ITEMS.getValue(new ResourceLocation(MercuLab.MOD_ID, name));
     }
 
     @Override
@@ -53,13 +53,13 @@ public class BlockChemicalGlassware extends BlockChemicalBase {
     }
 
     @Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity tileEntity, ItemStack itemStack) {
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, TileEntity te, ItemStack itemStack) {
         ItemStack newStack = new ItemStack(getItemDropped(state, new Random(), 0));
 
         NBTTagCompound tileEntityTag = new NBTTagCompound();
 
-        if (tileEntity != null) {
-            tileEntityTag = tileEntity.writeToNBT(tileEntityTag);
+        if (te != null) {
+            tileEntityTag = te.writeToNBT(tileEntityTag);
         }
 
         tileEntityTag.setInteger("x", 0);
