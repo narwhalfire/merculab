@@ -11,7 +11,7 @@ import net.scottnotfound.merculab.chemical.ChemicalContainer;
 import net.scottnotfound.merculab.chemical.ChemicalStack;
 import net.scottnotfound.merculab.chemical.IChemicalContainer;
 import net.scottnotfound.merculab.chemical.capability.template.ChemicalHandlerItemStack;
-import net.scottnotfound.merculab.init.MercuLabItems;
+import net.scottnotfound.merculab.init.MercuLabBlocks;
 
 public class CapabilityChemicalHandler
 {
@@ -27,7 +27,7 @@ public class CapabilityChemicalHandler
                                             () -> new ChemicalContainer(0));
         CapabilityManager.INSTANCE.register(IChemicalHandlerItem.class,
                                             new DefaultChemicalHandlerStorage<>(),
-                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabItems.vial), 0));
+                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabBlocks.vial), 0));
     }
 
     private static class DefaultChemicalHandlerStorage<T extends IChemicalHandler> implements Capability.IStorage<T> {

@@ -4,7 +4,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.block.TestBlockProcessAB;
 import net.scottnotfound.merculab.block.TestBlockbakedmodel;
-import net.scottnotfound.merculab.block.glassware.BlockVial;
+import net.scottnotfound.merculab.block.glassware.BlockChemicalGlassware;
 import net.scottnotfound.merculab.test.TestBlock;
 import net.scottnotfound.merculab.test.TestContainerBlock;
 
@@ -19,7 +19,7 @@ public class MercuLabBlocks {
     public static TestBlockProcessAB testBlockProcessAB;
     public static TestBlockbakedmodel bakedModelBlock;
 
-    public static BlockVial vial;
+    public static BlockChemicalGlassware vial;
 
 
     private static void preInitBlocks() {
@@ -29,7 +29,7 @@ public class MercuLabBlocks {
         testBlockProcessAB = new TestBlockProcessAB();
         bakedModelBlock = new TestBlockbakedmodel();
 
-        vial = new BlockVial(1000);
+        vial = new BlockChemicalGlassware("vial");
 
     }
 

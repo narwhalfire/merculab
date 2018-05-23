@@ -1,11 +1,10 @@
-package net.scottnotfound.merculab.item.glassware;
+package net.scottnotfound.merculab.block.glassware;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumActionResult;
@@ -15,33 +14,23 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
+import net.scottnotfound.merculab.block.ItemBlockChemicalBase;
 import net.scottnotfound.merculab.chemical.capability.template.ChemicalHandlerItemStack;
-import net.scottnotfound.merculab.init.IInitializer;
-import net.scottnotfound.merculab.init.MercuLabBlocks;
 import net.scottnotfound.merculab.init.MercuLabItems;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- *  The vial is used to store fluid or solid material (or maybe even gaseous).
- *  Used as temporary storage.
- */
-public class ItemVial extends ItemBlock implements IInitializer
-{
+public class ItemBlockChemicalGlassware extends ItemBlockChemicalBase {
 
     private final int capacity;
 
-    public ItemVial(int capacity) {
-        super(MercuLabBlocks.vial);
-        this.capacity = capacity;
+    public ItemBlockChemicalGlassware(BlockChemicalGlassware block) {
+        super(block);
+        this.capacity = block.capacity;
         this.setCreativeTab(MercuLabItems.CHEM);
     }
 
-    /**
-     * Called when a Block is right-clicked with this Item
-     */
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing,
                                       float hitX, float hitY, float hitZ) {
@@ -82,13 +71,5 @@ public class ItemVial extends ItemBlock implements IInitializer
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
         return new ChemicalHandlerItemStack(stack, capacity);
-    }
-
-    @Override
-    public void init() {
-
-        this.setRegistryName("vial");
-        ForgeRegistries.ITEMS.register(this);
-
     }
 }
