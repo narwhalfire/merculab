@@ -8,11 +8,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public enum EnumGlasswareType implements IStringSerializable {
 
 
-    GLASS_VIAL(0, "glass_vial", "glassVial", TileEntityVial.class),
-    GLASS_JAR(1, "glass_jar", "glassJar", TileEntityJar.class),
-    GLASS_BOTTLE(2, "glass_bottle", "glassBottle", TileEntityBottle.class),
-    GLASS_BEAKER(3, "glass_beaker", "glassBeaker", TileEntityBeaker.class),
-    GLASS_FLASK(4, "glass_flask", "glassFlask", TileEntityFlask.class),
+    GLASS_VIAL      (0, "glass_vial"    , "glassVial"   , TileEntityVial.class),
+    GLASS_JAR       (1, "glass_jar"     , "glassJar"    , TileEntityJar.class),
+    GLASS_BOTTLE    (2, "glass_bottle"  , "glassBottle" , TileEntityBottle.class),
+    GLASS_BEAKER    (3, "glass_beaker"  , "glassBeaker" , TileEntityBeaker.class),
+    GLASS_FLASK     (4, "glass_flask"   , "glassFlask"  , TileEntityFlask.class),
     ;
 
 
@@ -43,7 +43,7 @@ public enum EnumGlasswareType implements IStringSerializable {
         return this.unlocalizedName;
     }
 
-    public Class<? extends TileEntity> getTeClass() {
+    public Class<? extends TileEntity> getTileEntityClass() {
         return teClass;
     }
 
