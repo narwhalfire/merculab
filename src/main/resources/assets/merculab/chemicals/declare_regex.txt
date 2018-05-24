@@ -1,0 +1,2 @@
+(\w+)
+public static Chemical $&;
