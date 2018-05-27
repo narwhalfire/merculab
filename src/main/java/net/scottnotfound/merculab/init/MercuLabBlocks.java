@@ -19,7 +19,7 @@ public class MercuLabBlocks {
     public static TestBlockProcessAB testBlockProcessAB;
     public static TestBlockbakedmodel bakedModelBlock;
 
-    public static BlockChemicalGlassware vial;
+    public static BlockChemicalGlassware glassware;
 
 
     private static void preInitBlocks() {
@@ -29,7 +29,7 @@ public class MercuLabBlocks {
         testBlockProcessAB = new TestBlockProcessAB();
         bakedModelBlock = new TestBlockbakedmodel();
 
-        vial = new BlockChemicalGlassware("vial");
+        glassware = new BlockChemicalGlassware();
 
     }
 
@@ -40,7 +40,7 @@ public class MercuLabBlocks {
         initList.add(testBlockProcessAB);
         initList.add(bakedModelBlock);
 
-        initList.add(vial);
+        initList.add(glassware);
 
     }
 
@@ -67,6 +67,7 @@ public class MercuLabBlocks {
         testContainerBlock.initModel();
         testBlockProcessAB.initModel();
         bakedModelBlock.initModel();
+        glassware.initModel();
     }
 
     @SideOnly(Side.CLIENT)

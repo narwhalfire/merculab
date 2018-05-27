@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "variants" : {
+    "normal": [{}],
+    "inventory": [{}],
+    "variant": {
+      "glass_vial": {"model": "merculab:glass_vial"},
+      "glass_jar": {"model": "merculab:glass_jar"},
+      "glass_bottle": {"model": "merculab:glass_bottle"},
+      "glass_beaker": {"model": "merculab:glass_beaker"},
+      "glass_flask": {"model": "merculab:glass_flask"}
+    }
+  }
+}

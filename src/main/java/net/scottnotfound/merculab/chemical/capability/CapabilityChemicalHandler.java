@@ -27,7 +27,7 @@ public class CapabilityChemicalHandler
                                             () -> new ChemicalContainer(0));
         CapabilityManager.INSTANCE.register(IChemicalHandlerItem.class,
                                             new DefaultChemicalHandlerStorage<>(),
-                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabBlocks.vial), 0));
+                                            () -> new ChemicalHandlerItemStack(new ItemStack(MercuLabBlocks.glassware), 0));
     }
 
     private static class DefaultChemicalHandlerStorage<T extends IChemicalHandler> implements Capability.IStorage<T> {

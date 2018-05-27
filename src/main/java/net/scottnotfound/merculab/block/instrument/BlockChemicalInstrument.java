@@ -19,7 +19,6 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.scottnotfound.merculab.MercuLab;
 import net.scottnotfound.merculab.block.BlockChemicalBase;
-import net.scottnotfound.merculab.block.storage.ItemBlockChemicalContainer;
 import org.apache.commons.lang3.text.WordUtils;
 
 import javax.annotation.Nullable;

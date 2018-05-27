@@ -1,0 +1,17 @@
+{
+  "parent": "merculab:block/glassware",
+  "elements": [
+    {
+      "from": [4, 0, 4],
+      "to": [12, 15, 12],
+      "faces": {
+        "down": {"texture": "merculab:blocks/glass_vial_bottom"},
+        "up": {"texture": "merculab:blocks/glass_vial_top"},
+        "west": {"texture": "merculab:blocks/glass_vial_side"},
+        "east": {"texture": "merculab:blocks/glass_vial_side"},
+        "north": {"texture": "merculab:blocks/glass_vial_side"},
+        "south": {"texture": "merculab:blocks/glass_vial_side"}
+      }
+    }
+  ]
+}

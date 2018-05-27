@@ -3,7 +3,6 @@ package net.scottnotfound.merculab.block.glassware;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +15,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.scottnotfound.merculab.block.ItemBlockChemicalBase;
 import net.scottnotfound.merculab.chemical.capability.template.ChemicalHandlerItemStack;
-import net.scottnotfound.merculab.init.MercuLabItems;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,7 +26,6 @@ public class ItemBlockChemicalGlassware extends ItemBlockChemicalBase {
     public ItemBlockChemicalGlassware(BlockChemicalGlassware block) {
         super(block);
         this.capacity = block.capacity;
-        this.setCreativeTab(MercuLabItems.CHEM);
     }
 
     @Override
@@ -46,7 +43,7 @@ public class ItemBlockChemicalGlassware extends ItemBlockChemicalBase {
         ItemStack itemStack = player.getHeldItem(hand);
 
         if (!itemStack.isEmpty() && player.canPlayerEdit(pos, facing, itemStack)
-            && worldIn.mayPlace(this.block, pos, false, facing, (Entity) null)) {
+            && worldIn.mayPlace(this.block, pos, false, facing, null)) {
 
             int i = this.getMetadata(itemStack.getMetadata());
             IBlockState newState = this.block.getStateForPlacement(worldIn, pos, facing, hitX, hitY, hitZ, i, player, hand);
@@ -67,6 +64,10 @@ public class ItemBlockChemicalGlassware extends ItemBlockChemicalBase {
 
     }
 
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
 
     @Override
     public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, @Nullable NBTTagCompound nbt) {
