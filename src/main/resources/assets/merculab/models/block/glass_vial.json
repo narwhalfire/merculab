@@ -1,16 +1,33 @@
 {
-  "parent": "merculab:block/glassware",
+  "textures": {
+    "vial_bottom": "merculab:blocks/vial_bottom",
+    "vial_top": "merculab:blocks/vial_top",
+    "vial_side": "merculab:blocks/vial_side",
+    "particle": "#vial_side"
+  },
   "elements": [
     {
-      "from": [4, 0, 4],
-      "to": [12, 15, 12],
+      "from": [6,0,6],
+      "to": [10,10,10],
       "faces": {
-        "down": {"texture": "merculab:blocks/glass_vial_bottom"},
-        "up": {"texture": "merculab:blocks/glass_vial_top"},
-        "west": {"texture": "merculab:blocks/glass_vial_side"},
-        "east": {"texture": "merculab:blocks/glass_vial_side"},
-        "north": {"texture": "merculab:blocks/glass_vial_side"},
-        "south": {"texture": "merculab:blocks/glass_vial_side"}
+        "up": {"uv": [6,6,10,10], "texture": "#vial_top"},
+        "down": {"uv": [6,6,10,10], "texture": "#vial_bottom"},
+        "west": {"uv": [6,6,10,16], "texture": "#vial_side"},
+        "east": {"uv": [6,6,10,16], "texture": "#vial_side"},
+        "north": {"uv": [6,6,10,16], "texture": "#vial_side"},
+        "south": {"uv": [6,6,10,16], "texture": "#vial_side"}
+      }
+    },
+    {
+      "from": [6,0,6],
+      "to": [10,10,10],
+      "faces": {
+        "up": {"uv": [10,6,6,10], "texture": "#vial_top"},
+        "down": {"uv": [10,6,6,10], "texture": "#vial_bottom"},
+        "west": {"uv": [10,6,6,16], "texture": "#vial_side"},
+        "east": {"uv": [10,6,6,16], "texture": "#vial_side"},
+        "north": {"uv": [10,6,6,16], "texture": "#vial_side"},
+        "south": {"uv": [10,6,6,16], "texture": "#vial_side"}
       }
     }
   ]
