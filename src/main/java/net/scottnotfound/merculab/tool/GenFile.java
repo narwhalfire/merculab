@@ -11,6 +11,7 @@ public abstract class GenFile {
 
     protected Map<String,List<String>> mapInit;
     protected List<String> importStrs = new LinkedList<>();
+    protected List<String> destLines = null;
     protected String packageStr = "";
     protected String annotationStr = "";
     protected String classStr = "";
@@ -18,7 +19,7 @@ public abstract class GenFile {
 
     protected File srcFile = null;
     protected File destFile = null;
-
+    
     private static final String MARK_START = "/* *** GENERATED START *** */";
     private static final String MARK_END = "/* *** GENERATED END *** */";
 
@@ -46,10 +47,10 @@ public abstract class GenFile {
 
         FileReader fileReader = new FileReader(destFile);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
-        List<String> lines = bufferedReader.lines().collect(Collectors.toCollection(LinkedList::new));
+        destLines = bufferedReader.lines().collect(Collectors.toCollection(LinkedList::new));
 
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i).trim();
+        for (int i = 0; i < destLines.size(); i++) {
+            String line = destLines.get(i).trim();
             if (line.equals(MARK_START)) {
                 genStart = i;
                 genEnd = i;
@@ -63,7 +64,7 @@ public abstract class GenFile {
             throw new FileAlreadyExistsException("Generated file exists but no generated markers found.");
         }
 
-        return lines;
+        return destLines;
     }
 
     /**
@@ -174,10 +175,10 @@ public abstract class GenFile {
         list.add("");
         list.addAll(prefixTabs(buildFields()));
         list.add("");
-        list.add("");
-        list.addAll(prefixTabs(buildMethods()));
+        list.addAll(prefixTabs(buildMethodsForRegen()));
         list.add("");
         list.add(prefixTab(MARK_END));
+        list.addAll(prefixTabs(buildMethodsForOpt()));
 
         return list;
     }
@@ -205,14 +206,17 @@ public abstract class GenFile {
 
         list.add(String.format("public class %s {", classStr));
         list.add("");
-        list.add(MARK_START);
+        list.add("");
+        list.add(prefixTab(MARK_START));
         list.add("");
         list.addAll(prefixTabs(buildFields()));
         list.add("");
+        list.addAll(prefixTabs(buildMethodsForRegen()));
         list.add("");
-        list.addAll(prefixTabs(buildMethods()));
+        list.add(prefixTab(MARK_END));
         list.add("");
-        list.add(MARK_END);
+        list.add("");
+        list.addAll(prefixTabs(buildMethodsForOpt()));
         list.add("");
         list.add("}");
 
@@ -245,6 +249,26 @@ public abstract class GenFile {
         return list;
     }
 
+    protected List<String> buildMethodsForRegen() {
+
+        List<String> list = new LinkedList<>();
+
+        list.addAll(buildMethInit());
+        list.addAll(buildMethInitTypes());
+
+        return list;
+    }
+
+    protected List<String> buildMethodsForOpt() {
+
+        List<String> list = new LinkedList<>();
+
+        list.addAll(buildMethInitTypeEmpty());
+        list.addAll(buildMethRegisterEmpty());
+
+        return list;
+    }
+
     protected List<String> buildMethRegister() {
 
         List<String> list = new LinkedList<>();
@@ -257,6 +281,25 @@ public abstract class GenFile {
         list.add("");
         list.add(prefixTab("}"));
         list.add("");
+        list.add("}");
+
+        return list;
+    }
+
+    protected List<String> buildMethRegisterEmpty() {
+
+        List<String> list = new LinkedList<>();
+
+        if (destLines != null) {
+            for (String string : destLines) {
+                if (string.contains("public static void register()")) {
+                    return list;
+                }
+            }
+        }
+
+        list.add("public static void register() {");
+        list.add(prefixTab("// TODO: this"));
         list.add("}");
 
         return list;
@@ -308,6 +351,33 @@ public abstract class GenFile {
             list.add(prefixTab(String.format("return %s;", type.toLowerCase())));
             list.add("");
             list.add("}");
+        }
+
+        return list;
+    }
+
+    protected List<String> buildMethInitTypeEmpty() {
+
+        List<String> list = new LinkedList<>();
+
+        for(String type : mapInit.keySet()) {
+
+            if (destLines != null) {
+                boolean flag = false;
+                for (String string : destLines) {
+                    if (string.contains(String.format("private static %1$s init%1$s(String name)", type))) {
+                        flag = true;
+                    }
+                }
+                if (flag) continue;
+            }
+
+            list.add(String.format("private static %1$s init%1$s(String name) {", type));
+            list.add("");
+            list.add(prefixTab("// TODO: this"));
+            list.add(prefixTab("return null;"));
+            list.add("}");
+            list.add("");
         }
 
         return list;

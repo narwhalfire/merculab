@@ -1,12 +1,12 @@
 package net.scottnotfound.merculab.init;
 
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.scottnotfound.merculab.chemical.Chemical;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MercuLabChemicals {
+
 
     /* *** GENERATED START *** */
 
@@ -61,13 +61,11 @@ public class MercuLabChemicals {
     public static Chemical boron_chloride;
     public static Chemical aluminum_chloride;
 
-
     public static void init() {
 
         initChemicals();
 
     }
-
 
     private static void initChemicals() {
 
@@ -121,26 +119,17 @@ public class MercuLabChemicals {
 
     }
 
+    /* *** GENERATED END *** */
+
+
     private static Chemical initChemical(String name) {
 
-        Chemical chemical = new Chemical(name);
-        chemical.setRegistryName(name);
-        initList.add(chemical);
-
-        return chemical;
-
+        // TODO: this
+        return null;
     }
 
     public static void register() {
-
-        for (Chemical chemical : initList) {
-
-            GameRegistry.findRegistry(Chemical.class).register(chemical);
-
-        }
-
+        // TODO: this
     }
-
-    /* *** GENERATED END *** */
 
 }
