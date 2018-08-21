@@ -1,11 +1,11 @@
-package net.scottnotfound.merculab;
+package net.scottnotfound.merculab.init;
 
 
 import net.minecraftforge.common.config.Configuration;
-import org.apache.logging.log4j.Level;
 import net.scottnotfound.merculab.proxy.Proxy;
+import org.apache.logging.log4j.Level;
 
-public class Config {
+public abstract class Config {
 
     private static final String CATEGORY_GENERAL = "general";
 
