@@ -9,16 +9,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLLog;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
-import net.scottnotfound.merculab.init.IInitializer;
 
 import java.util.Locale;
 
 /**
  *  This is the class that will represent any kind of chemical.
  */
-public class Chemical extends IForgeRegistryEntry.Impl<Chemical> implements IInitializer
+public class Chemical extends IForgeRegistryEntry.Impl<Chemical>
 {
 
     /** The name of the registry for Chemicals. */
@@ -136,11 +134,4 @@ public class Chemical extends IForgeRegistryEntry.Impl<Chemical> implements IIni
     public ResourceLocation getAsAtomicStructure(World world, BlockPos pos) {return getAsAtomicStructure();}
     public ResourceLocation getAsItem           (World world, BlockPos pos) {return getAsItem();}
 
-    @Override
-    public void init() {
-
-        this.setRegistryName(chemicalName);
-        GameRegistry.findRegistry(Chemical.class).register(this);
-
-    }
 }

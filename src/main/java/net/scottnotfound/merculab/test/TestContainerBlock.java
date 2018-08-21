@@ -14,13 +14,11 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.MercuLab;
-import net.scottnotfound.merculab.init.IInitializer;
+import net.scottnotfound.merculab.init.MercuLab;
 
-public class TestContainerBlock extends Block implements IInitializer, ITileEntityProvider {
+public class TestContainerBlock extends Block implements ITileEntityProvider {
 
     public static ItemBlock itemBlock;
 
@@ -53,17 +51,5 @@ public class TestContainerBlock extends Block implements IInitializer, ITileEnti
         }
         player.openGui(MercuLab.instance, GUI_ID, world, pos.getX(), pos.getY(), pos.getZ());
         return true;
-    }
-
-    @Override
-    public void init() {
-
-        this.setRegistryName("testcontainerblock");
-        ForgeRegistries.BLOCKS.register(this);
-
-        itemBlock = new ItemBlock(this);
-        itemBlock.setRegistryName(this.getRegistryName());
-        ForgeRegistries.ITEMS.register(itemBlock);
-
     }
 }

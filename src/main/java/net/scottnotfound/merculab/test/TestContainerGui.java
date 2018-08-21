@@ -2,7 +2,7 @@ package net.scottnotfound.merculab.test;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
-import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.MercuLab;
 
 public class TestContainerGui extends GuiContainer {
 

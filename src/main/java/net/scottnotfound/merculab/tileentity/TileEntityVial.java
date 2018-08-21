@@ -1,4 +1,4 @@
-package net.scottnotfound.merculab.block.glassware;
+package net.scottnotfound.merculab.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

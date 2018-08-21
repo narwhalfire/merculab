@@ -17,14 +17,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.block.property.UnlistedPropertyBlockAvailable;
 import net.scottnotfound.merculab.client.render.block.model.TestBakedModel;
-import net.scottnotfound.merculab.init.IInitializer;
 
-public class TestBlockbakedmodel extends Block implements IInitializer {
+public class TestBlockbakedmodel extends Block {
 
     public static ItemBlock itemBlock;
 
@@ -130,22 +128,5 @@ public class TestBlockbakedmodel extends Block implements IInitializer {
 
     private boolean isSameBlock(IBlockAccess world, BlockPos pos) {
         return false;
-    }
-
-    @Override
-    public void init() {
-
-        this.setRegistryName("bakedmodelblock");
-        ForgeRegistries.BLOCKS.register(this);
-
-        itemBlock = new ItemBlock(this);
-        itemBlock.setRegistryName(this.getRegistryName());
-        ForgeRegistries.ITEMS.register(itemBlock);
-
-    }
-
-    @Override
-    public void register() {
-
     }
 }

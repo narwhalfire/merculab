@@ -14,14 +14,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.init.MercuLab;
-import net.scottnotfound.merculab.init.IInitializer;
 import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
-public class TestBlockProcessAB extends Block implements IInitializer, ITileEntityProvider {
+public class TestBlockProcessAB extends Block implements ITileEntityProvider {
 
     public static ItemBlock itemBlock;
 
@@ -54,22 +52,5 @@ public class TestBlockProcessAB extends Block implements IInitializer, ITileEnti
         }
         player.openGui(MercuLab.instance, GUI_ID, world, blockPos.getX(), blockPos.getY(), blockPos.getZ());
         return true;
-    }
-
-    @Override
-    public void init() {
-
-        this.setRegistryName("processab");
-        ForgeRegistries.BLOCKS.register(this);
-
-        itemBlock = new ItemBlock(this);
-        itemBlock.setRegistryName(this.getRegistryName());
-        ForgeRegistries.ITEMS.register(itemBlock);
-
-    }
-
-    @Override
-    public void register() {
-
     }
 }

@@ -7,7 +7,7 @@ import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IRegistryDelegate;
-import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.MercuLab;
 
 import javax.annotation.Nullable;
 
