@@ -15,7 +15,6 @@ public class TestBlock extends Block {
 
     public TestBlock() {
         super(Material.AIR);
-        setUnlocalizedName("test_block");
     }
 
     @SideOnly(Side.CLIENT)

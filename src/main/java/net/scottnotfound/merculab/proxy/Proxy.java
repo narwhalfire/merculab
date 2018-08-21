@@ -30,6 +30,7 @@ public class Proxy implements IProxy {
 
     public static Configuration config;
 
+    @Override
     public void preInit(FMLPreInitializationEvent event) {
         MercuLab.logger = event.getModLog();
         MercuLabBlocks.init();
@@ -41,16 +42,19 @@ public class Proxy implements IProxy {
         Config.readConfig();
     }
 
+    @Override
     public void init(FMLInitializationEvent event) {
         registerOthers();
     }
 
+    @Override
     public void postInit(FMLPostInitializationEvent event) {
         if (config.hasChanged()) {
             config.save();
         }
     }
 
+    @Override
     public void serverLoad(FMLServerStartingEvent event) {
 
     }

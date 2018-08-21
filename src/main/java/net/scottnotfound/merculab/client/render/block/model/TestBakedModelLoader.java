@@ -12,8 +12,8 @@ public class TestBakedModelLoader implements ICustomModelLoader {
 
     @Override
     public boolean accepts(ResourceLocation location) {
-        return location.getResourceDomain().equals(MercuLab.MOD_ID)
-                && "bakedmodelblock".equals(location.getResourcePath());
+        return location.getNamespace().equals(MercuLab.MOD_ID)
+                && "bakedmodelblock".equals(location.getPath());
     }
 
     @Override
