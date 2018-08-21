@@ -32,6 +32,16 @@ public abstract class GenFile {
 
     protected abstract void initFile();
 
+    /**
+     * Searches to see if the destination file already exists. If it does already exist, then it searches that
+     * file for the markers that mark the beginning (start) and ending (end) of the section of generated code
+     * that is replaceable. The section between the markers is what will be updated and replaced upon
+     * regeneration of the file. Code lying outside these markers will be left alone.
+     *
+     * @return List of all lines of the destination file that already exists.
+     * @throws FileNotFoundException thrown when the destination file does not exist
+     * @throws FileAlreadyExistsException thrown when the destination file exists with no markers
+     */
     protected List<String> scrapeDest() throws FileNotFoundException, FileAlreadyExistsException {
 
         FileReader fileReader = new FileReader(destFile);
@@ -56,6 +66,9 @@ public abstract class GenFile {
         return lines;
     }
 
+    /**
+     * Attempts to regenerate the file at the destination. Generates a new file if destination does not exist.
+     */
     protected void genFile() {
 
         try {
@@ -68,6 +81,12 @@ public abstract class GenFile {
 
     }
 
+    /**
+     * Attempts to regenerate the file at the destination by replacing the code between the markers.
+     * Throws exceptions from scrapeDest()
+     *
+     * @see #scrapeDest()
+     */
     protected void regenFile() throws FileNotFoundException, FileAlreadyExistsException {
 
         List<String> newList = new LinkedList<>();
@@ -109,6 +128,16 @@ public abstract class GenFile {
 
     }
 
+    /**
+     * Organizes a list of strings into a map with sections of strings. A line surrounded in square brackets is
+     * the beginning of a new section with name being that of the string inside those brackets. All following
+     * lines are added to that section until a new section is found. In the case that a section is found that
+     * has already been placed into the map, the lines in that newly found section will be appended to the one
+     * under the same name that already exists.
+     *
+     * @param list lines from file
+     * @return sectioned lines
+     */
     protected Map<String,List<String>> buildMap(List<String> list) {
         Map<String,List<String>> map = new HashMap<>();
 
