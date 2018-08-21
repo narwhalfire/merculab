@@ -4,7 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.MercuLab;
 import net.scottnotfound.merculab.inventory.container.TestContainerProcessAB;
 
 public class TestGuiProcessAB extends GuiContainer {

@@ -10,7 +10,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.client.model.pipeline.UnpackedBakedQuad;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.property.IExtendedBlockState;
-import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.MercuLab;
 import net.scottnotfound.merculab.block.TestBlockbakedmodel;
 
 import java.util.ArrayList;

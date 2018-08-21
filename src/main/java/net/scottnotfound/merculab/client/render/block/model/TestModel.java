@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.common.model.IModelState;
 import net.minecraftforge.common.model.TRSRTransformation;
-import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.MercuLab;
 
 import java.util.Collection;
 import java.util.Collections;
