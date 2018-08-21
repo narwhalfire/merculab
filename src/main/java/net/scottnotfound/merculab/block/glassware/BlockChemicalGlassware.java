@@ -1,7 +1,6 @@
 package net.scottnotfound.merculab.block.glassware;
 
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -10,7 +9,6 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -20,13 +18,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.MercuLab;
 import net.scottnotfound.merculab.block.BlockChemicalBase;
-import net.scottnotfound.merculab.init.MercuLabItems;
+import net.scottnotfound.merculab.init.MercuLab;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
@@ -44,7 +39,10 @@ public class BlockChemicalGlassware extends BlockChemicalBase {
     public BlockChemicalGlassware() {
         super(Material.GLASS);
         this.setDefaultState(this.blockState.getBaseState().withProperty(VARIANT, EnumGlasswareType.GLASS_VIAL));
-        this.setCreativeTab(MercuLabItems.CHEM);
+    }
+
+    public BlockChemicalGlassware(String name) {
+        this();
     }
 
     @Override
@@ -91,7 +89,7 @@ public class BlockChemicalGlassware extends BlockChemicalBase {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {VARIANT});
+        return new BlockStateContainer(this, VARIANT);
     }
 
     @Override
@@ -144,25 +142,6 @@ public class BlockChemicalGlassware extends BlockChemicalBase {
         }
     }
 
-    @Override
-    public void init() {
-
-        // register this Block
-        this.setRegistryName("glassware");
-        ForgeRegistries.BLOCKS.register(this);
-
-        // register this block's ItemBlock
-        ItemBlock itemBlock = new ItemBlockChemicalGlassware(this);
-        itemBlock.setRegistryName("glassware");
-        ForgeRegistries.ITEMS.register(itemBlock);
-
-        // register this block's TileEntities
-        for (EnumGlasswareType glasswareType : EnumGlasswareType.values()) {
-            GameRegistry.registerTileEntity(glasswareType.getTileEntityClass(), glasswareType.getName());
-        }
-
-    }
-
     @SideOnly(Side.CLIENT)
     public void initModel() {
 
@@ -173,5 +152,15 @@ public class BlockChemicalGlassware extends BlockChemicalBase {
 
         ModelBakery.registerItemVariants(Item.getItemFromBlock(this), locations);
         ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(this), stack -> locations[stack.getMetadata()]);
+    }
+
+    @Override
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return null;
+    }
+
+    @Override
+    public ResourceLocation getTileRegistryName() {
+        return null;
     }
 }

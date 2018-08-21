@@ -17,7 +17,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.MercuLab;
+import net.scottnotfound.merculab.init.MercuLab;
 import net.scottnotfound.merculab.init.IInitializer;
 import net.scottnotfound.merculab.tileentity.TestTileEntityProcessAB;
 
@@ -65,6 +65,11 @@ public class TestBlockProcessAB extends Block implements IInitializer, ITileEnti
         itemBlock = new ItemBlock(this);
         itemBlock.setRegistryName(this.getRegistryName());
         ForgeRegistries.ITEMS.register(itemBlock);
+
+    }
+
+    @Override
+    public void register() {
 
     }
 }

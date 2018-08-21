@@ -16,7 +16,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.scottnotfound.merculab.block.ItemBlockChemicalBase;
 import net.scottnotfound.merculab.chemical.capability.template.ChemicalHandlerItemStack;
-import net.scottnotfound.merculab.init.MercuLabItems;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,7 +27,6 @@ public class ItemBlockChemicalMachine extends ItemBlockChemicalBase {
     public ItemBlockChemicalMachine(BlockChemicalMachine block) {
         super(block);
         this.capacity = block.capacity;
-        this.setCreativeTab(MercuLabItems.CHEM);
     }
 
     @Override

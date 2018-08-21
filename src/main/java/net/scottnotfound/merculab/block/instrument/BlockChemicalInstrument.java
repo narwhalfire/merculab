@@ -4,7 +4,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,10 +15,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.scottnotfound.merculab.MercuLab;
 import net.scottnotfound.merculab.block.BlockChemicalBase;
-import org.apache.commons.lang3.text.WordUtils;
+import net.scottnotfound.merculab.init.MercuLab;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
@@ -89,36 +86,12 @@ public class BlockChemicalInstrument extends BlockChemicalBase {
     }
 
     @Override
-    public void init() {
-
-        // register this Block
-        this.setRegistryName(this.name);
-        ForgeRegistries.BLOCKS.register(this);
-
-        // register this block's ItemBlock
-        ItemBlock itemBlock = new ItemBlockChemicalInstrument(this);
-        itemBlock.setRegistryName(this.name);
-        ForgeRegistries.ITEMS.register(itemBlock);
-
-        // register this block's TileEntity
-        GameRegistry.registerTileEntity(this.getTileEntityClass(), this.name);
-
+    public Class<? extends TileEntity> getTileEntityClass() {
+        return null;
     }
 
-    private Class<? extends TileEntity> getTileEntityClass() {
-
-        Class<? extends TileEntity> tileEntityClass;
-
-        try {
-            tileEntityClass = Class.forName("net.scottnotfound.merculab.block.instrument.TileEntity"
-                                            + WordUtils.capitalizeFully(this.name)).asSubclass(TileEntity.class);
-        } catch (ClassNotFoundException e) {
-            FMLLog.bigWarning("Class TileEntity" + WordUtils.capitalizeFully(this.name) +
-                              " could not be found. This is a fatal error.", e);
-            FMLCommonHandler.instance().exitJava(1, false);
-            tileEntityClass = TileEntity.class;
-        }
-
-        return tileEntityClass;
+    @Override
+    public ResourceLocation getTileRegistryName() {
+        return null;
     }
 }

@@ -23,7 +23,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.block.property.UnlistedPropertyBlockAvailable;
 import net.scottnotfound.merculab.client.render.block.model.TestBakedModel;
 import net.scottnotfound.merculab.init.IInitializer;
-import net.scottnotfound.merculab.init.MercuLabBlocks;
 
 public class TestBlockbakedmodel extends Block implements IInitializer {
 
@@ -130,7 +129,7 @@ public class TestBlockbakedmodel extends Block implements IInitializer {
     }
 
     private boolean isSameBlock(IBlockAccess world, BlockPos pos) {
-        return world.getBlockState(pos).getBlock() == MercuLabBlocks.bakedModelBlock;
+        return false;
     }
 
     @Override
@@ -142,6 +141,11 @@ public class TestBlockbakedmodel extends Block implements IInitializer {
         itemBlock = new ItemBlock(this);
         itemBlock.setRegistryName(this.getRegistryName());
         ForgeRegistries.ITEMS.register(itemBlock);
+
+    }
+
+    @Override
+    public void register() {
 
     }
 }
