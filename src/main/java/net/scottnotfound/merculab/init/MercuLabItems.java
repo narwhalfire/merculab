@@ -1,67 +1,56 @@
 package net.scottnotfound.merculab.init;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.scottnotfound.merculab.test.TestItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MercuLabItems {
 
-    private static ArrayList<IInitializer> initList = new ArrayList<>();
+    private static final List<Item> initList = new ArrayList<>();
 
+
+    // TestItem
     public static TestItem testItem;
     public static TestItem testItemA;
     public static TestItem testItemB;
 
-    public static final CreativeTabs CHEM = new CreativeTabs("chem") {
-        @Override
-        public ItemStack getTabIconItem() {
-            return new ItemStack(Items.SUGAR);
+
+    public static void init() {
+
+        initTestItems();
+
+    }
+
+
+    private static void initTestItems() {
+
+        testItem                = initTestItem("testItem");
+        testItemA               = initTestItem("testItemA");
+        testItemB               = initTestItem("testItemB");
+
+    }
+
+    private static TestItem initTestItem(String name) {
+
+        TestItem testitem = new TestItem(name);
+        testitem.setRegistryName(name);
+        initList.add(testitem);
+
+        return testitem;
+
+    }
+
+    public static void register() {
+
+        for (Item item : initList) {
+
+            GameRegistry.findRegistry(Item.class).register(item);
+
         }
-    };
-
-
-    private static void preInitItems() {
-
-        testItem = TestItem.t;
-        testItemA = TestItem.a;
-        testItemB = TestItem.b;
 
     }
 
-    private static void preInitList() {
-
-        initList.add(testItem);
-        initList.add(testItemA);
-        initList.add(testItemB);
-
-    }
-
-    public static void initItems() {
-
-        preInitItems();
-        preInitList();
-
-        for (IInitializer init : initList) {
-            init.init();
-        }
-
-    }
-
-    public static void registerItems() {
-
-
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void initModels() {
-        testItem.initModel();
-        testItemA.initModel();
-        testItemB.initModel();
-    }
 }

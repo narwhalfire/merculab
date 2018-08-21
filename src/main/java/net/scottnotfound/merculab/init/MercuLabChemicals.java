@@ -1,20 +1,18 @@
 package net.scottnotfound.merculab.init;
 
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.scottnotfound.merculab.chemical.Chemical;
 
 import java.util.ArrayList;
+import java.util.List;
 
-@GameRegistry.ObjectHolder("merculab")
 public class MercuLabChemicals {
 
-    private static ArrayList<IInitializer> initList = new ArrayList<>();
+    private static final List<Chemical> initList = new ArrayList<>();
 
 
+    // Chemical
     public static Chemical nil;
-
     public static Chemical hydrogen;
     public static Chemical helium;
     public static Chemical lithium;
@@ -33,7 +31,6 @@ public class MercuLabChemicals {
     public static Chemical phosphorus;
     public static Chemical chlorine;
     public static Chemical argon;
-
     public static Chemical hydrogen_oxide;
     public static Chemical lithium_oxide;
     public static Chemical sodium_oxide;
@@ -56,7 +53,6 @@ public class MercuLabChemicals {
     public static Chemical phosphorus_trioxide;
     public static Chemical chlorine_dioxide;
     public static Chemical chlorine_trioxide;
-
     public static Chemical lithium_chloride;
     public static Chemical sodium_chloride;
     public static Chemical beryllium_chloride;
@@ -65,86 +61,83 @@ public class MercuLabChemicals {
     public static Chemical aluminum_chloride;
 
 
-    private static void preInitChemicals() {
+    public static void init() {
 
-        nil                     = new Chemical("nil");
-
-        hydrogen                = new Chemical("hydrogen");
-        helium                  = new Chemical("helium");
-        lithium                 = new Chemical("lithium");
-        beryllium               = new Chemical("beryllium");
-        boron                   = new Chemical("boron");
-        carbon                  = new Chemical("carbon");
-        oxygen                  = new Chemical("oxygen");
-        nitrogen                = new Chemical("nitrogen");
-        fluorine                = new Chemical("fluorine");
-        neon                    = new Chemical("neon");
-        sodium                  = new Chemical("sodium");
-        magnesium               = new Chemical("magnesium");
-        aluminum                = new Chemical("aluminum");
-        silicon                 = new Chemical("silicon");
-        sulfur                  = new Chemical("sulfur");
-        phosphorus              = new Chemical("phosphorus");
-        chlorine                = new Chemical("chlorine");
-        argon                   = new Chemical("argon");
-
-        hydrogen_oxide          = new Chemical("hydrogen_oxide");
-        lithium_oxide           = new Chemical("lithium_oxide");
-        sodium_oxide            = new Chemical("sodium_oxide");
-        beryllium_oxide         = new Chemical("beryllium_oxide");
-        magnesium_oxide         = new Chemical("magnesium_oxide");
-        boron_trioxide          = new Chemical("boron_trioxide");
-        carbon_dioxide          = new Chemical("carbon_dioxide");
-        carbon_monoxide         = new Chemical("carbon_monoxide");
-        nitric_oxide            = new Chemical("nitric_oxide");
-        nitrogen_dioxide        = new Chemical("nitrogen_dioxide");
-        nitrous_oxide           = new Chemical("nitrous_oxide");
-        dinitrogen_trioxide     = new Chemical("dinitrogen_trioxide");
-        dinitrogen_tetroxide    = new Chemical("dinitrogen_tetroxide");
-        dioxygen_difluoride     = new Chemical("dioxygen_difluoride");
-        aluminum_oxide          = new Chemical("aluminum_oxide");
-        silicon_dioxide         = new Chemical("silicon_dioxide");
-        sulfur_dioxide          = new Chemical("sulfur_dioxide");
-        sulfur_trioxide         = new Chemical("sulfur_trioxide");
-        phosphorus_pentoxide    = new Chemical("phosphorus_pentoxide");
-        phosphorus_trioxide     = new Chemical("phosphorus_trioxide");
-        chlorine_dioxide        = new Chemical("chlorine_dioxide");
-        chlorine_trioxide       = new Chemical("chlorine_trioxide");
-
-        lithium_chloride        = new Chemical("lithium_chloride");
-        sodium_chloride         = new Chemical("sodium_chloride");
-        beryllium_chloride      = new Chemical("beryllium_chloride");
-        magnesium_chloride      = new Chemical("magnesium_chloride");
-        boron_chloride          = new Chemical("boron_chloride");
-        aluminum_chloride       = new Chemical("aluminum_chloride");
+        initChemicals();
 
     }
 
-    private static void preInitList() {
 
-        initList.add(silicon_dioxide);
+    private static void initChemicals() {
+
+        nil                     = initChemical("nil");
+        hydrogen                = initChemical("hydrogen");
+        helium                  = initChemical("helium");
+        lithium                 = initChemical("lithium");
+        beryllium               = initChemical("beryllium");
+        boron                   = initChemical("boron");
+        carbon                  = initChemical("carbon");
+        oxygen                  = initChemical("oxygen");
+        nitrogen                = initChemical("nitrogen");
+        fluorine                = initChemical("fluorine");
+        neon                    = initChemical("neon");
+        sodium                  = initChemical("sodium");
+        magnesium               = initChemical("magnesium");
+        aluminum                = initChemical("aluminum");
+        silicon                 = initChemical("silicon");
+        sulfur                  = initChemical("sulfur");
+        phosphorus              = initChemical("phosphorus");
+        chlorine                = initChemical("chlorine");
+        argon                   = initChemical("argon");
+        hydrogen_oxide          = initChemical("hydrogen_oxide");
+        lithium_oxide           = initChemical("lithium_oxide");
+        sodium_oxide            = initChemical("sodium_oxide");
+        beryllium_oxide         = initChemical("beryllium_oxide");
+        magnesium_oxide         = initChemical("magnesium_oxide");
+        boron_trioxide          = initChemical("boron_trioxide");
+        carbon_dioxide          = initChemical("carbon_dioxide");
+        carbon_monoxide         = initChemical("carbon_monoxide");
+        nitric_oxide            = initChemical("nitric_oxide");
+        nitrogen_dioxide        = initChemical("nitrogen_dioxide");
+        nitrous_oxide           = initChemical("nitrous_oxide");
+        dinitrogen_trioxide     = initChemical("dinitrogen_trioxide");
+        dinitrogen_tetroxide    = initChemical("dinitrogen_tetroxide");
+        dioxygen_difluoride     = initChemical("dioxygen_difluoride");
+        aluminum_oxide          = initChemical("aluminum_oxide");
+        silicon_dioxide         = initChemical("silicon_dioxide");
+        sulfur_dioxide          = initChemical("sulfur_dioxide");
+        sulfur_trioxide         = initChemical("sulfur_trioxide");
+        phosphorus_pentoxide    = initChemical("phosphorus_pentoxide");
+        phosphorus_trioxide     = initChemical("phosphorus_trioxide");
+        chlorine_dioxide        = initChemical("chlorine_dioxide");
+        chlorine_trioxide       = initChemical("chlorine_trioxide");
+        lithium_chloride        = initChemical("lithium_chloride");
+        sodium_chloride         = initChemical("sodium_chloride");
+        beryllium_chloride      = initChemical("beryllium_chloride");
+        magnesium_chloride      = initChemical("magnesium_chloride");
+        boron_chloride          = initChemical("boron_chloride");
+        aluminum_chloride       = initChemical("aluminum_chloride");
 
     }
 
-    public static void initChemicals() {
+    private static Chemical initChemical(String name) {
 
-        preInitChemicals();
-        preInitList();
+        Chemical chemical = new Chemical(name);
+        chemical.setRegistryName(name);
+        initList.add(chemical);
 
-        for (IInitializer init : initList) {
-            init.init();
+        return chemical;
+
+    }
+
+    public static void register() {
+
+        for (Chemical chemical : initList) {
+
+            GameRegistry.findRegistry(Chemical.class).register(chemical);
+
         }
 
     }
 
-    public static void registerChemicals() {
-
-
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void initModels() {
-
-    }
 }

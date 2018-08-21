@@ -2,7 +2,6 @@ package net.scottnotfound.merculab.proxy;
 
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -11,8 +10,4 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ServerProxy extends Proxy
 {
 
-    @Override
-    public void serverLoad(FMLServerStartingEvent event) {
-
-    }
 }

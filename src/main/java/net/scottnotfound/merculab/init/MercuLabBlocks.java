@@ -1,77 +1,59 @@
 package net.scottnotfound.merculab.init;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import net.scottnotfound.merculab.block.TestBlockProcessAB;
-import net.scottnotfound.merculab.block.TestBlockbakedmodel;
+import net.minecraft.block.Block;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.scottnotfound.merculab.block.IMercuLabTileProv;
 import net.scottnotfound.merculab.block.glassware.BlockChemicalGlassware;
-import net.scottnotfound.merculab.test.TestBlock;
-import net.scottnotfound.merculab.test.TestContainerBlock;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MercuLabBlocks {
 
-    private static ArrayList<IInitializer> initList = new ArrayList<>();
+    private static final List<Block> initList = new ArrayList<>();
 
-    public static TestBlock testBlock;
-    public static TestContainerBlock testContainerBlock;
-    public static TestBlockProcessAB testBlockProcessAB;
-    public static TestBlockbakedmodel bakedModelBlock;
 
+    // BlockChemicalGlassware
     public static BlockChemicalGlassware glassware;
 
 
-    private static void preInitBlocks() {
+    public static void init() {
 
-        testBlock = new TestBlock();
-        testContainerBlock = new TestContainerBlock();
-        testBlockProcessAB = new TestBlockProcessAB();
-        bakedModelBlock = new TestBlockbakedmodel();
-
-        glassware = new BlockChemicalGlassware();
+        initBlockChemicalGlasswares();
 
     }
 
-    private static void preInitList() {
 
-        initList.add(testBlock);
-        initList.add(testContainerBlock);
-        initList.add(testBlockProcessAB);
-        initList.add(bakedModelBlock);
+    private static void initBlockChemicalGlasswares() {
 
-        initList.add(glassware);
+        glassware               = initBlockChemicalGlassware("glassware");
 
     }
 
-    public static void initBlocks() {
+    private static BlockChemicalGlassware initBlockChemicalGlassware(String name) {
 
-        preInitBlocks();
-        preInitList();
+        BlockChemicalGlassware blockchemicalglassware = new BlockChemicalGlassware(name);
+        blockchemicalglassware.setRegistryName(name);
+        initList.add(blockchemicalglassware);
 
-        for (IInitializer init : initList) {
-            init.init();
+        return blockchemicalglassware;
+
+    }
+
+    public static void register() {
+
+        for (Block block : initList) {
+
+            if (block instanceof IMercuLabTileProv) {
+                GameRegistry.registerTileEntity(
+                        ((IMercuLabTileProv) block).getTileEntityClass(),
+                        ((IMercuLabTileProv) block).getTileRegistryName());
+            }
+
+            GameRegistry.findRegistry(Block.class).register(block);
+
         }
 
     }
 
-    public static void registerBlocks() {
-
-
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void initModels() {
-        testBlock.initModel();
-        testContainerBlock.initModel();
-        testBlockProcessAB.initModel();
-        bakedModelBlock.initModel();
-        glassware.initModel();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void initItemModels() {
-        bakedModelBlock.initItemModel();
-    }
 }

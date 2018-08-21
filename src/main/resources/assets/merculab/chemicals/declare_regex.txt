@@ -1,2 +1,0 @@
-(\w+)
-public static Chemical $&;

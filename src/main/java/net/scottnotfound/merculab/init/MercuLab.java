@@ -1,6 +1,4 @@
-package net.scottnotfound.merculab;
-
-// imports
+package net.scottnotfound.merculab.init;
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -17,9 +15,13 @@ public class MercuLab {
     public static final String MOD_NAME = "MercuLab";
     public static final String MOD_VERSION = "0.0.1";
 
-    @SidedProxy(clientSide = "net.scottnotfound.merculab.proxy.ClientProxy",
-            serverSide = "net.scottnotfound.merculab.proxy.ServerProxy")
+    @SidedProxy(
+            clientSide = "net.scottnotfound.merculab.proxy.ClientProxy",
+            serverSide = "net.scottnotfound.merculab.proxy.ServerProxy"
+    )
     public static Proxy proxy;
+
+    public static Init init;
 
     @Mod.Instance
     public static MercuLab instance;
