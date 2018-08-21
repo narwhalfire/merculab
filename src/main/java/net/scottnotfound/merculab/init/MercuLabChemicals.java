@@ -8,8 +8,9 @@ import java.util.List;
 
 public class MercuLabChemicals {
 
-    private static final List<Chemical> initList = new ArrayList<>();
+    /* *** GENERATED START *** */
 
+    private static final List<Chemical> initList = new ArrayList<>();
 
     // Chemical
     public static Chemical nil;
@@ -139,5 +140,7 @@ public class MercuLabChemicals {
         }
 
     }
+
+    /* *** GENERATED END *** */
 
 }

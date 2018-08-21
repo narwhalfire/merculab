@@ -70,7 +70,9 @@ public class Init {
 
     @SubscribeEvent
     public static void registerRegistries(RegistryEvent.NewRegistry event) {
-        new RegistryBuilder().setName(new ResourceLocation("merculab:chemical_registry")).setType(Chemical.class).create();
+        new RegistryBuilder().setName(new ResourceLocation("merculab:chemical_registry"))
+                             .setType(Chemical.class)
+                             .create();
     }
 
 }

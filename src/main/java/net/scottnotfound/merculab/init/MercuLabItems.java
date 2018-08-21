@@ -9,8 +9,9 @@ import java.util.List;
 
 public class MercuLabItems {
 
-    private static final List<Item> initList = new ArrayList<>();
+    /* *** GENERATED START *** */
 
+    private static final List<Item> initList = new ArrayList<>();
 
     // TestItem
     public static TestItem testItem;
@@ -52,5 +53,7 @@ public class MercuLabItems {
         }
 
     }
+
+    /* *** GENERATED END *** */
 
 }

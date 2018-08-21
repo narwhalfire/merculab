@@ -25,7 +25,7 @@ public class Generate {
     private static void generateFiles() {
 
         for (GenFile file : files) {
-            file.generateFile();
+            file.genFile();
         }
 
     }

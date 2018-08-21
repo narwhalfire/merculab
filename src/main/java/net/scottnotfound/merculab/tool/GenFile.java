@@ -1,11 +1,9 @@
 package net.scottnotfound.merculab.tool;
 
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -21,6 +19,12 @@ public abstract class GenFile {
     protected File srcFile = null;
     protected File destFile = null;
 
+    private static final String MARK_START = "/* *** GENERATED START *** */";
+    private static final String MARK_END = "/* *** GENERATED END *** */";
+
+    private int genStart = -1;
+    private int genEnd = -1;
+
     GenFile() {
         initFile();
         mapInit = buildMap(readInitList());
@@ -28,10 +32,62 @@ public abstract class GenFile {
 
     protected abstract void initFile();
 
-    protected void generateFile() {
+    protected List<String> scrapeDest() throws FileNotFoundException, FileAlreadyExistsException {
+
+        FileReader fileReader = new FileReader(destFile);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        List<String> lines = bufferedReader.lines().collect(Collectors.toCollection(LinkedList::new));
+
+        for (int i = 0; i < lines.size(); i++) {
+            String line = lines.get(i).trim();
+            if (line.equals(MARK_START)) {
+                genStart = i;
+                genEnd = i;
+            }
+            if (line.equals(MARK_END)) {
+                genEnd = i;
+            }
+        }
+
+        if (genStart == -1 || genEnd == -1) {
+            throw new FileAlreadyExistsException("Generated file exists but no generated markers found.");
+        }
+
+        return lines;
+    }
+
+    protected void genFile() {
 
         try {
-            Files.write(destFile.toPath(), buildFile());
+            regenFile();
+        } catch (FileNotFoundException e) {
+            genNewFile();
+        } catch (FileAlreadyExistsException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    protected void regenFile() throws FileNotFoundException, FileAlreadyExistsException {
+
+        List<String> newList = new LinkedList<>();
+        List<String> oldList = scrapeDest();
+        newList.addAll(oldList.subList(0, genStart));
+        newList.addAll(buildRegen());
+        newList.addAll(oldList.subList(genEnd+1, oldList.size()));
+
+        try {
+            Files.write(destFile.toPath(), newList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    protected void genNewFile() {
+
+        try {
+            Files.write(destFile.toPath(), buildNewFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,7 +137,23 @@ public abstract class GenFile {
         return map;
     }
 
-    protected List<String> buildFile() {
+    protected List<String> buildRegen() {
+
+        List<String> list = new LinkedList<>();
+
+        list.add(prefixTab(MARK_START));
+        list.add("");
+        list.addAll(prefixTabs(buildFields()));
+        list.add("");
+        list.add("");
+        list.addAll(prefixTabs(buildMethods()));
+        list.add("");
+        list.add(prefixTab(MARK_END));
+
+        return list;
+    }
+
+    protected List<String> buildNewFile() {
 
         List<String> list = new LinkedList<>();
 
@@ -104,10 +176,14 @@ public abstract class GenFile {
 
         list.add(String.format("public class %s {", classStr));
         list.add("");
+        list.add(MARK_START);
+        list.add("");
         list.addAll(prefixTabs(buildFields()));
         list.add("");
         list.add("");
         list.addAll(prefixTabs(buildMethods()));
+        list.add("");
+        list.add(MARK_END);
         list.add("");
         list.add("}");
 
@@ -119,7 +195,6 @@ public abstract class GenFile {
         List<String> list = new LinkedList<>();
 
         list.add(String.format("private static final List<%s> initList = new ArrayList<>();", typeStr));
-        list.add("");
         list.add("");
         list.addAll(collectInsts());
 

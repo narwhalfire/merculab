@@ -10,8 +10,9 @@ import java.util.List;
 
 public class MercuLabBlocks {
 
-    private static final List<Block> initList = new ArrayList<>();
+    /* *** GENERATED START *** */
 
+    private static final List<Block> initList = new ArrayList<>();
 
     // BlockChemicalGlassware
     public static BlockChemicalGlassware glassware;
@@ -55,5 +56,7 @@ public class MercuLabBlocks {
         }
 
     }
+
+    /* *** GENERATED END *** */
 
 }
