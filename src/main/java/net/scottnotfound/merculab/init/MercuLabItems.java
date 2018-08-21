@@ -18,6 +18,7 @@ public class MercuLabItems {
     public static TestItem testItemA;
     public static TestItem testItemB;
 
+
     public static void init() {
 
         initTestItems();

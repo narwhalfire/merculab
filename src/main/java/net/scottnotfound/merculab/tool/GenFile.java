@@ -149,10 +149,10 @@ public abstract class GenFile {
             if (s.length() >= 2 && s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']') {
                 if (k != null) {
                     if (map.containsKey(k)) {
-                        v.addAll(map.get(k));
+                        map.get(k).addAll(v);
+                    } else {
+                        map.put(k, v);
                     }
-                    v.add("");
-                    map.put(k, v);
                 }
                 k = s.substring(1, s.length() - 1);
                 v = new LinkedList<>();
@@ -161,7 +161,11 @@ public abstract class GenFile {
             }
         }
         if (k != null && !v.isEmpty()) {
-            map.put(k, v);
+            if (map.containsKey(k)) {
+                map.get(k).addAll(v);
+            } else {
+                map.put(k, v);
+            }
         }
 
         return map;
@@ -228,7 +232,6 @@ public abstract class GenFile {
         List<String> list = new LinkedList<>();
 
         list.add(String.format("private static final List<%s> initList = new ArrayList<>();", typeStr));
-        list.add("");
         list.addAll(collectInsts());
 
         return list;
@@ -298,6 +301,7 @@ public abstract class GenFile {
             }
         }
 
+        list.add("");
         list.add("public static void register() {");
         list.add(prefixTab("// TODO: this"));
         list.add("}");
@@ -372,12 +376,12 @@ public abstract class GenFile {
                 if (flag) continue;
             }
 
+            list.add("");
             list.add(String.format("private static %1$s init%1$s(String name) {", type));
             list.add("");
             list.add(prefixTab("// TODO: this"));
             list.add(prefixTab("return null;"));
             list.add("}");
-            list.add("");
         }
 
         return list;
@@ -386,12 +390,14 @@ public abstract class GenFile {
     protected List<String> collectInsts() {
         List<String> list = new LinkedList<>();
         for (String type : mapInit.keySet()) {
+            list.add("");
             list.add("// " + type);
             list.addAll(mapInit.get(type)
                                .stream()
                                .map(s -> mapInst(type, s))
                                .collect(Collectors.toCollection(LinkedList::new)));
         }
+        list.add("");
         return list;
     }
 
