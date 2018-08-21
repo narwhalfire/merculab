@@ -6,7 +6,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
-import net.scottnotfound.merculab.proxy.Proxy;
+import net.scottnotfound.merculab.proxy.IProxy;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = MercuLab.MOD_ID, name = MercuLab.MOD_NAME, version = MercuLab.MOD_VERSION)
 public class MercuLab {
@@ -15,22 +16,19 @@ public class MercuLab {
     public static final String MOD_NAME = "MercuLab";
     public static final String MOD_VERSION = "0.0.1";
 
+    @Mod.Instance
+    public static MercuLab instance;
+
     @SidedProxy(
             clientSide = "net.scottnotfound.merculab.proxy.ClientProxy",
             serverSide = "net.scottnotfound.merculab.proxy.ServerProxy"
     )
-    public static Proxy proxy;
+    public static IProxy proxy;
 
-    public static Init init;
-
-    @Mod.Instance
-    public static MercuLab instance;
-
-    public static org.apache.logging.log4j.Logger logger;
+    public static Logger logger;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
         proxy.preInit(event);
     }
 
